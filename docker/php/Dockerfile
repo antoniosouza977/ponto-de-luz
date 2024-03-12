@@ -16,9 +16,8 @@ WORKDIR /var/www
 COPY . /var/www
 COPY ./docker/php/start.sh /usr/local/bin/start
 RUN chmod u+x /usr/local/bin/start
-RUN chmod u+x /var/www/storage/logs/
-# Instale as dependências do Laravel usando o Composer
-RUN composer install --no-interaction --no-plugins --no-scripts --prefer-dist
+RUN chmod u+x /var/www/storage/
+
 
 # Defina as permissões adequadas para os diretórios de armazenamento
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache

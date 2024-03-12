@@ -30,14 +30,14 @@ services:
       - task_manager
 
   node:
-    image: node:latest
+    build:
+        context: .
+        dockerfile: docker/node/Dockerfile
     restart: unless-stopped
     ports:
         - "5173:5173"
-    working_dir: /var/www/
     volumes:
         - ./:/var/www
     networks:
         - task_manager
-    command: 'npm run dev'
 
