@@ -44,9 +44,11 @@ export default {
                 <div class="user_option">
                     <a href="">
                         <i class="fa fa-user" aria-hidden="true"></i>
-                        <span>
-                Login
-              </span>
+                        <span>Login</span>
+                    </a>
+                    <a href="/admin">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span>Admin</span>
                     </a>
                     <a href="">
                         <i class="fa fa-shopping-bag" aria-hidden="true"></i>

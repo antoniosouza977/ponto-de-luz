@@ -2,20 +2,24 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-        <!-- bootstrap core css -->
-        <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}" />
 
         <!-- Custom styles for this template -->
         <link href="{{asset('css/style.css')}}" rel="stylesheet" />
         <!-- responsive style -->
         <link href="{{asset('css/responsive.css')}}" rel="stylesheet" />
 
+        <!-- Custom fonts for this template-->
+        <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @routes
@@ -24,9 +28,12 @@
     <body class="font-sans antialiased">
         @inertia
     </body>
-    <script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-    </script>
-    <script src="{{asset('js/custom.js')}}"></script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
 </html>

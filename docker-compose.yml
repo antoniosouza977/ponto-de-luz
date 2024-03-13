@@ -3,7 +3,7 @@ version: "3.7"
 networks:
   proxy:
     external: true
-  task_manager:
+  app:
 
 services:
   app:
@@ -15,7 +15,7 @@ services:
     volumes:
       - .:/var/www
     networks:
-      - task_manager
+      - app
       - proxy
 
   nginx:
@@ -27,7 +27,7 @@ services:
       - ./:/var/www
       - ./docker/nginx/:/etc/nginx/conf.d/
     networks:
-      - task_manager
+      - app
 
   node:
     build:
@@ -39,5 +39,5 @@ services:
     volumes:
         - ./:/var/www
     networks:
-        - task_manager
+        - app
 
