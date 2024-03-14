@@ -1,32 +1,33 @@
 <script>
 import Header from "@/Components/Admin/Header.vue";
 import SideBar from "@/Components/Admin/SideBar.vue";
-import Content from "@/Components/Admin/Content.vue";
-import EventosGlobais from "@/Components/Admin/EventosGlobais.vue";
+import Body from "@/Components/Admin/Body.vue";
+import Main from "@/Components/Admin/Main.vue";
 
 export default {
     name: "Dashboard",
     components: {
-        EventosGlobais,
+        Main,
         Header,
         SideBar,
-        Content
+        Body
     },
-    methods: {
-
-    }
+    methods: {}
 }
 </script>
 
 <template>
 
-    <EventosGlobais>
+    <Main>
         <div id="pageBody">
             <div id="wrapper">
 
                 <SideBar></SideBar>
 
-                <Content></Content>
+                <Body>
+                    <slot></slot>
+                </Body>
+
 
             </div>
 
@@ -34,6 +35,6 @@ export default {
                 <i class="fas fa-angle-up"></i>
             </a></div>
 
-    </EventosGlobais>
+    </Main>
 
 </template>

@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: "EventosGlobais",
+    name: "Main",
     mounted() {
         $(window).resize(function() {
             console.log('alo')
