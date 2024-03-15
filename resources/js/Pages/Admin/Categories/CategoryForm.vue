@@ -5,14 +5,14 @@ import {useForm} from "@inertiajs/vue3";
 
 export default {
     name: "CategoryForm",
-    props: ['action', 'message'],
+    props: ['action', 'formRoute'],
     components: {FormCard, Dashboard},
     data() {
         return {
             form: useForm({
                 name: null
             }),
-            formRoute: route('categories.store')
+            successMessage: 'Categoria salva com sucesso!'
         }
     },
 }
@@ -20,12 +20,12 @@ export default {
 
 <template>
     <Dashboard>
-        <FormCard v-bind="$props" :form="form" :formRoute="formRoute">
+        <FormCard v-bind="$props" :form="form" :formRoute="formRoute" :successMessage="successMessage">
             <div class="col-xl-3 col-12">
                 <div class="form-group p-3">
                     <label class="form-label" for="name">Nome</label>
                     <input class="form-control" type="text" id="name" v-model="form.name">
-                    <div class="my-3 text-danger" v-if="$attrs.errors">{{ $attrs.errors.name }}</div>
+                    <div class="my-3 text-danger" v-if="form.errors">{{ form.errors.name }}</div>
                 </div>
             </div>
         </FormCard>

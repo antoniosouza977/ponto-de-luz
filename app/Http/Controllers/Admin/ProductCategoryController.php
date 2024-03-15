@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductCategoryRequest;
 use App\Models\ProductCategory;
 use App\Services\Repository;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 
 class ProductCategoryController extends Controller
@@ -20,16 +21,16 @@ class ProductCategoryController extends Controller
     public function showNewCategoryForm(): Response
     {
         $action = 'Cadastrar Nova Categoria';
+        $formRoute = route('categories.store');
 
-        return inertia()->render('Admin/Categories/CategoryForm', compact('action'));
+        return inertia()->render('Admin/Categories/CategoryForm', compact('action', 'formRoute'));
     }
 
-    public function storeCategory(ProductCategoryRequest $request)
+    public function storeCategory(ProductCategoryRequest $request): RedirectResponse
     {
-//        $this->repository->storeModel($request->all(), new ProductCategory());
+//        dd($request->all());
+        $this->repository->storeModel($request->all(), new ProductCategory());
 
-
-
-        return redirect()->back()->with('message', 'Categoria salva com sucesso!');
+        return redirect()->back();
     }
 }

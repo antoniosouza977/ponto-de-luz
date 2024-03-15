@@ -3,7 +3,6 @@ export default {
     name: "Main",
     mounted() {
         $(window).resize(function() {
-            console.log('alo')
             if ($(window).width() < 768) {
                 $('.sidebar .collapse').collapse('hide');
             };
