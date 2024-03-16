@@ -1,16 +1,17 @@
 <script>
-import FormCard from "@/Components/CRUD/FormCard.vue";
+import FormCRUD from "@/Components/CRUD/FormCRUD.vue";
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
 import {useForm} from "@inertiajs/vue3";
 
 export default {
     name: "CategoryForm",
-    props: ['action', 'formRoute'],
-    components: {FormCard, Dashboard},
+    props: ['action', 'formRoute', 'category'],
+    components: {FormCRUD, Dashboard},
     data() {
         return {
             form: useForm({
-                name: null
+                id: this.category ? this.category.id : null,
+                name: this.category ? this.category.name : null,
             }),
             successMessage: 'Categoria salva com sucesso!'
         }
@@ -20,7 +21,7 @@ export default {
 
 <template>
     <Dashboard>
-        <FormCard v-bind="$props" :form="form" :formRoute="formRoute" :successMessage="successMessage">
+        <FormCRUD v-bind="$props" :form="form" :formRoute="formRoute" :successMessage="successMessage">
             <div class="col-xl-3 col-12">
                 <div class="form-group p-3">
                     <label class="form-label" for="name">Nome</label>
@@ -28,7 +29,7 @@ export default {
                     <div class="my-3 text-danger" v-if="form.errors">{{ form.errors.name }}</div>
                 </div>
             </div>
-        </FormCard>
+        </FormCRUD>
     </Dashboard>
 
 </template>

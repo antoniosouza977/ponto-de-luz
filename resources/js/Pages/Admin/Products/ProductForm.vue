@@ -1,12 +1,12 @@
 <script>
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
-import FormCard from "@/Components/CRUD/FormCard.vue";
+import FormCRUD from "@/Components/CRUD/FormCRUD.vue";
 import {useForm} from "@inertiajs/vue3";
 
 export default {
     name: "ProductForm",
     props: ['action', 'categories'],
-    components: {Dashboard, FormCard},
+    components: {Dashboard, FormCRUD},
     data() {
         return {
             form: useForm({
@@ -20,7 +20,7 @@ export default {
 
 <template>
     <Dashboard>
-        <FormCard v-bind="$props" :form="form">
+        <FormCRUD v-bind="$props" :form="form">
 
             <div class="col-xl-6 col-12">
                 <div class="form-group p-3">
@@ -67,7 +67,7 @@ export default {
                     </select>
                 </div>
             </div>
-        </FormCard>
+        </FormCRUD>
 
     </Dashboard>
 </template>

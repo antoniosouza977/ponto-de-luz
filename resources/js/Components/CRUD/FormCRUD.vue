@@ -2,7 +2,7 @@
 import { useToast } from "vue-toastification";
 
 export default {
-    name: "FormCard",
+    name: "FormCRUD",
     props: ['action', 'form', 'formRoute', 'successMessage'],
     data() {
         return {

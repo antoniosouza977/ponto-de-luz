@@ -1,43 +1,44 @@
 <template>
-    <div id="login" class="container-fluid">
-        <div id="login-box" class="mx-auto bg-light rounded">
-            <main class="form-signin w-100 m-auto shadow-sm p-4">
-                <form @submit.prevent="login">
-                    <h1 class="h3 mb-3 fw-normal">Faça o login</h1>
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center justify-content-center h-100">
+                <div class="col-md-8 col-lg-7 col-xl-6">
+                    <img src="/images/login.png"
+                         class="img-fluid" alt="Phone image">
+                </div>
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 border rounded p-3 shadow-sm">
+                    <form>
+                        <!-- Email input -->
+                        <div class="form-outline mb-4" style="height: 112px;">
+                            <label class="form-label" for="email" >Email</label>
+                            <input type="email" id="email" class="form-control form-control-lg" v-model="form.email" />
+                            <div class="text-danger mt-2" v-if="form.errors.email">{{form.errors.email}}</div>
+                        </div>
 
-                    <div class="form-group mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input v-model="form.email" type="email" class="form-control" id="email"
-                            placeholder="email@example.com">
-                    </div>
+                        <!-- Password input -->
+                        <div class="form-outline mb-4" style="height: 112px;">
+                            <label class="form-label" for="email" >Senha</label>
+                            <input type="password" id="email" class="form-control form-control-lg" v-model="form.password"/>
+                            <div class="text-danger mt-2" v-if="form.errors.password">{{form.errors.password}}</div>
+                        </div>
 
-                    <div class="form-group mb-3">
-                        <label class="form-label" for="password">Senha</label>
-                        <input v-model="form.password" type="password" class="form-control" id="password"
-                            placeholder="password">
-                    </div>
+                        <div class="d-flex justify-content-around align-items-center mb-4">
+                            <!-- Checkbox -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="remember" v-model="form.remember"/>
+                                <label class="form-check-label" for="remember"> Lembre de mim </label>
+                            </div>
+                            <a href="#!">Esqueceu a senha?</a>
+                        </div>
 
-                    <div class="mb-3">
-                        <p v-for="error in errors" class="alert alert-danger">
-                            {{ error }}
-                        </p>
-                    </div>
+                        <!-- Submit button -->
+                        <button @click.prevent="login" class="btn btn-primary btn-lg btn-block">Logar</button>
 
-                    <div class="form-group">
-                        <Link :href="route('register')">
-                            <button class="btn btn-secondary py-2 mx-2">
-                                Registrar
-                            </button>
-                        </Link>
-                        <button class="btn btn-primary py-2" type="submit">
-                            Logar
-                        </button>
-                    </div>
-
-                </form>
-            </main>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 </template>
 <script>
 import { Link } from '@inertiajs/vue3'
@@ -47,32 +48,20 @@ export default {
     components: {
         Link
     },
-    props: {
-        errors : null
-    },
     data() {
         return {
             form: useForm({
                 email: null,
                 password: null,
+                remember: false
             })
         }
     },
     methods: {
         login() {
-            this.form.post('/login')
+            this.form.post(route('login.post'))
         }
     }
 }
 </script>
-<style scoped>
-#login {
-    background-color: rgba(0, 0, 0, 0.788);
-    height: 100vh;
-    padding-top: 18vh;
-}
 
-#login-box {
-    width: 30vw;
-}
-</style>
