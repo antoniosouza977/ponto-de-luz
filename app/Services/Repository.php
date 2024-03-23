@@ -25,4 +25,9 @@ class Repository
         $model->delete();
     }
 
+    public function syncManyToManyRelations($relation, array $ids)
+    {
+        $relation->sync($ids);
+    }
+
 }

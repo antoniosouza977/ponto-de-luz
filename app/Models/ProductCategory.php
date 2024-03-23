@@ -7,13 +7,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductCategory extends Model
 {
-    protected $table = 'products_categories';
+    protected $table = 'product_categories';
     protected $fillable = [
-        'name'
+        'name',
+        'product_type_id'
     ];
 
-    public function products(): HasMany
+    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(Product::class, 'product_id', 'id');
+        return $this->belongsToMany(Product::class, 'categories_products', 'category_id', 'product_id');
+    }
+
+    public function type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(ProductType::class, 'product_type_id', 'id');
     }
 }

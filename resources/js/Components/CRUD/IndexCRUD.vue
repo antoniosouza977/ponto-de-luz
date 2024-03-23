@@ -1,7 +1,9 @@
 <script>
+import {Link} from "@inertiajs/vue3";
 export default {
     name: "IndexCRUD",
-    props: ['action', 'categories']
+    components : {Link},
+    props: ['action', 'newBtn', 'newRoute']
 }
 </script>
 
@@ -12,6 +14,7 @@ export default {
 
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">{{ action }}</h6>
+                <Link :href="newRoute" class="btn btn-primary">{{ newBtn }}</Link>
             </div>
 
             <div class="card-body">

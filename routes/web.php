@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,20 @@ Route::group([
         'prefix' => 'produtos',
         'as' => 'products.'
     ], function () {
-        Route::get('/novo', [ProductController::class, 'showNewProductForm'])->name('new');
+        Route::get('/novo', [ProductController::class, 'showNewProductForm'])->name('create');
+        Route::post('/novo', [ProductController::class, 'storeNewProduct'])->name('store');
+    });
+
+    Route::group([
+        'prefix' => 'tipos-produto',
+        'as' => 'product.types.'
+    ], function () {
+        Route::get('/', [ProductTypeController::class, 'index'])->name('index');
+        Route::get('/novo', [ProductTypeController::class, 'showNewProductTypeForm'])->name('create');
+        Route::post('/novo', [ProductTypeController::class, 'storeProductType'])->name('store');
+        Route::get('/editar-tipo-produto/{type}', [ProductTypeController::class, 'showEditProductTypeForm'])->name('edit');
+        Route::post('/editar-tipo-produto/{type}', [ProductTypeController::class, 'updateProductType'])->name('update');
+        Route::post('/remove-tipo-produto/{type}', [ProductTypeController::class, 'destroyProductType'])->name('destroy');
     });
 
     Route::group([
@@ -37,9 +51,9 @@ Route::group([
     ], function () {
         Route::get('/', [ProductCategoryController::class, 'index'])->name('index');
         Route::get('/nova', [ProductCategoryController::class, 'showNewCategoryForm'])->name('create');
+        Route::post('/nova', [ProductCategoryController::class, 'storeCategory'])->name('store');
         Route::get('/editar-categoria/{category}', [ProductCategoryController::class, 'showEditCategoryForm'])->name('edit');
         Route::post('/editar-categoria/{category}', [ProductCategoryController::class, 'updateCategory'])->name('update');
-        Route::post('/nova', [ProductCategoryController::class, 'storeCategory'])->name('store');
         Route::post('/remover-categoria/{category}', [ProductCategoryController::class, 'destroyCategory'])->name('destroy');
     });
 });

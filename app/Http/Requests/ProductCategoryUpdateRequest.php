@@ -22,7 +22,8 @@ class ProductCategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:50'
+            'name' => 'required|max:50',
+            'product_type_id' => 'required'
         ];
     }
 
@@ -30,7 +31,8 @@ class ProductCategoryUpdateRequest extends FormRequest
     {
         return [
             'name.required' => 'O nome da categoria é obrigatório.',
-            'name.max' => 'Informe uma categoria com até 50 caracteres.'
+            'name.max' => 'Informe uma categoria com até 50 caracteres.',
+            'product_type_id.required' => 'O tipo é obrigatório.',
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductCategoryStoreRequest;
 use App\Http\Requests\ProductCategoryUpdateRequest;
 use App\Models\ProductCategory;
+use App\Models\ProductType;
 use App\Services\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
@@ -24,25 +25,29 @@ class ProductCategoryController extends Controller
     public function index(): Response
     {
         $action = 'Lista de Categorias';
+        $newBtn = 'Nova Categoria';
+        $newRoute = route('categories.create');
         $categories = $this->repository->getAllModelsFrom(new ProductCategory());
 
-        return inertia()->render('Admin/Categories/CategoryIndex', compact('action', 'categories'));
+        return inertia()->render('Admin/Categories/CategoryIndex', compact('action', 'categories', 'newBtn', 'newRoute'));
     }
 
     public function showNewCategoryForm(): Response
     {
         $action = 'Cadastrar Nova Categoria';
         $formRoute = route('categories.store');
+        $types = $this->repository->getAllModelsFrom(new ProductType());
 
-        return inertia()->render('Admin/Categories/CategoryForm', compact('action', 'formRoute'));
+        return inertia()->render('Admin/Categories/CategoryForm', compact('action', 'formRoute', 'types'));
     }
 
     public function showEditCategoryForm(ProductCategory $category): Response
     {
         $action = 'Editar categoria: ' . $category->name;
         $formRoute = route('categories.update', $category);
+        $types = $this->repository->getAllModelsFrom(new ProductType());
 
-        return inertia()->render('Admin/Categories/CategoryForm', compact('category','action', 'formRoute'));
+        return inertia()->render('Admin/Categories/CategoryForm', compact('category','action', 'formRoute', 'types'));
     }
 
     public function updateCategory(ProductCategoryUpdateRequest $request, ProductCategory $category): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application

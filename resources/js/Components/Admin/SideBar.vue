@@ -44,15 +44,15 @@ export default {
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-               aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#produtos"
+               aria-expanded="true" aria-controls="produtos">
                 <i class="fas fa-fw fa-circle"></i>
                 <span style="font-size: 15px;">Produtos</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="produtos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
 <!--                    <h6 class="collapse-header">Custom Components:</h6>-->
-                    <Link class="collapse-item" :href="route('products.new')">Novo Produto</Link>
+                    <Link class="collapse-item" :href="route('products.create')">Novo Produto</Link>
 
                 </div>
             </div>
@@ -60,18 +60,31 @@ export default {
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-               aria-expanded="true" aria-controls="collapseUtilities">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categorias"
+               aria-expanded="true" aria-controls="categorias">
                 <i class="fas fa-fw fa-circle"></i>
                 <span style="font-size: 15px;">Categorias</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+            <div id="categorias" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <Link class="collapse-item" :href="route('categories.index')">Lista de Categorias</Link>
                     <Link class="collapse-item" :href="route('categories.create')">Nova Categoria</Link>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tipos"
+               aria-expanded="true" aria-controls="tipos">
+                <i class="fas fa-fw fa-circle"></i>
+                <span style="font-size: 15px;">Tipos de Produtos</span>
+            </a>
+            <div id="tipos" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <Link class="collapse-item" :href="route('product.types.create')">Novo Tipo</Link>
+                    <Link class="collapse-item" :href="route('product.types.index')">Lista de Tipos</Link>
                 </div>
             </div>
         </li>

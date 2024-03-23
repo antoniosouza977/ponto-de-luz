@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Product extends Model
 {
     protected $table = 'products';
+
     protected $fillable = [
         'name',
         'description',
@@ -17,12 +18,13 @@ class Product extends Model
         'category_id'
     ];
 
-    public function category(): BelongsTo
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsTo(ProductCategory::class, 'category_id', 'id');
+        return $this->belongsToMany(ProductCategory::class, 'categories_products', 'product_id', 'category_id')
+            ->withTimestamps();
     }
 
-    public function images()
+    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }

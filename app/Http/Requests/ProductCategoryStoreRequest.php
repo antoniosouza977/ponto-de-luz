@@ -22,7 +22,8 @@ class ProductCategoryStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:products_categories|max:50'
+            'name' => 'required|unique:product_categories|max:50',
+            'product_type_id' => 'required'
         ];
     }
 
@@ -31,7 +32,8 @@ class ProductCategoryStoreRequest extends FormRequest
         return [
             'name.required' => 'O nome da categoria é obrigatório.',
             'name.unique' => 'A categoria já existe.',
-            'name.max' => 'Informe uma categoria com até 50 caracteres.'
+            'name.max' => 'Informe uma categoria com até 50 caracteres.',
+            'product_type_id.required' => 'O tipo é obrigatório.',
         ];
     }
 }

@@ -49,3 +49,9 @@ export default {
     <slot></slot>
 </template>
 
+<style>
+:root {
+--vs-selected-bg: #fff;
+}
+</style>
+

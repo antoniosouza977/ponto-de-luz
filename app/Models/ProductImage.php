@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductImage extends Model
 {
-    protected $table = 'products_images';
+    protected $table = 'product_images';
     protected $fillable = [
         'path',
         'view_order',

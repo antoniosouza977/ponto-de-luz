@@ -5,16 +5,16 @@ import {useForm} from "@inertiajs/vue3";
 
 export default {
     name: "CategoryForm",
-    props: ['action', 'formRoute', 'category', 'types'],
+    props: ['action', 'formRoute', 'type'],
     components: {FormCRUD, Dashboard},
     data() {
         return {
             form: useForm({
-                id: this.category ? this.category.id : null,
-                name: this.category ? this.category.name : null,
-                product_type_id: this.category ? this.category.product_type_id : null,
+                id: this.type ? this.type.id : null,
+                name: this.type ? this.type.name : null,
+                active: this.type ? this.type.active : 1,
             }),
-            successMessage: 'Categoria salva com sucesso!'
+            successMessage: 'Tipo de Produto salvo com sucesso!'
         }
     },
 }
@@ -35,11 +35,12 @@ export default {
 
                 <div class="col-xl-3 col-12">
                     <div class="form-group p-3">
-                        <label class="form-label" for="product_type_id">Tipo</label>
-                        <select class="form-select" type="text" id="product_type_id" v-model="form.product_type_id">
-                            <option v-for="type in types" :value="type.id">{{type.name}}</option>
+                        <label class="form-label" for="active">Ativo</label>
+                        <select class="form-select" type="text" id="active" v-model="form.active">
+                            <option value="1">Sim</option>
+                            <option value="0">Não</option>
                         </select>
-                        <div class="my-3 text-danger" v-if="form.errors">{{ form.errors.product_type_id }}</div>
+                        <div class="my-3 text-danger" v-if="form.errors">{{ form.errors.active }}</div>
                     </div>
                 </div>
             </div>

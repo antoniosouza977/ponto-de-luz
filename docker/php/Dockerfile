@@ -15,6 +15,7 @@ WORKDIR /var/www
 # Copie o código fonte da aplicação Laravel para o contêiner
 COPY . /var/www
 COPY ./docker/php/start.sh /usr/local/bin/start
+COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php-custom.ini
 RUN chmod u+x /usr/local/bin/start
 RUN chmod u+x /var/www/storage/
 

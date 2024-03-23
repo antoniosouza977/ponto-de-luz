@@ -29,7 +29,7 @@ export default {
 </script>
 
 <template>
-    <div class="col-9">
+    <div class="col-xxl-9 col-12">
         <div class="card shadow mb-4">
 
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -37,9 +37,9 @@ export default {
             </div>
 
             <div class="card-body">
-                <div class="d-flex flex-row flex-wrap">
+                <form enctype="multipart/form-data">
                     <slot></slot>
-                </div>
+                </form>
             </div>
 
             <div class="card-footer d-flex" style="height: 63px">
