@@ -4,51 +4,84 @@ import FormCRUD from "@/Components/CRUD/FormCRUD.vue";
 import {useForm} from "@inertiajs/vue3";
 import {vMaska} from "maska";
 import VueSelect from "vue-select";
+import TrashIcon from "@/Components/CRUD/TrashIcon.vue";
+import draggable from "vuedraggable";
+import { useToast } from "vue-toastification";
 
 export default {
     name: "ProductForm",
     directives: {maska: vMaska},
-    components: {Dashboard, FormCRUD, VueSelect},
-    props: ['action', 'categories', 'formRoute'],
+    components: {TrashIcon, Dashboard, FormCRUD, VueSelect, draggable},
+    props: ['action', 'categories', 'formRoute', 'product'],
     data() {
         return {
+            toast: useToast(),
+            drag: false,
             images: [],
             priceMask: {
                 mask: "###.###.###,##",
                 reversed: true
             },
             form: useForm({
-                id: null,
-                name: null,
-                description: null,
-                price: null,
-                stock_quantity: null,
-                status: 'available',
-                categories_ids: [],
-                images: []
-            })
+                id: this.product ? this.product.id : null,
+                name: this.product ? this.product.name : null,
+                description: this.product ? this.product.description : null,
+                price: this.product ? this.product.price : null,
+                stock_quantity: this.product ? this.product.stock_quantity : null,
+                status: this.product ? this.product.status : 'available',
+                categories_ids: this.product ? this.product.categories : [],
+                images: this.product ? this.product.images : []
+            }),
+            successMessage: 'Produto Salvo com Sucesso!'
         }
     },
     methods: {
         handleImages(event) {
-            const file = event.target.files[0];
-            this.form.images.push(file)
-
-            if (file) {
+            const input = event.target
+            const images = input.files;
+            images.forEach(image => {
+                const newImage = {
+                    file: image,
+                    url: ''
+                }
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    this.images.push(e.target.result);
+                    newImage.url = e.target.result
+                    this.form.images.push(newImage);
                 };
-                reader.readAsDataURL(file);
-            }
+                reader.readAsDataURL(image);
+            })
+
+            input.value = ''
         },
+        destroyImage(image) {
+            const vue = this;
+
+            this.$swal.fire({
+                title: 'Confirmar Exclusão',
+                text: 'Tem certeza que deseja excluir o registro?',
+                showDenyButton: true,
+                confirmButtonText: 'Sim',
+                denyButtonText: 'Não'
+            }).then(alert => {
+                if (alert.isConfirmed) {
+                    axios.post(route('products.destroy.image', image))
+                        .then(resp => {
+                            if (resp.status === 200) {
+                                vue.form.images = resp.data
+                                vue.toast.success('Registro deletado com sucesso!')
+                            }
+                        })
+                }
+            });
+        }
     }
 }
 </script>
 
 <template>
     <Dashboard>
-        <FormCRUD v-bind="$props" :form="form">
+        <FormCRUD v-bind="$props" :form="form" :success-message="successMessage">
             <div class="d-flex flex-wrap border rounded">
 
                 <h6 class="col-12 mt-2">Dados do produto</h6>
@@ -113,25 +146,38 @@ export default {
                 </div>
 
             </div>
+
             <div class="d-flex flex-wrap border rounded mt-3">
-                <h6 class="col-12 mt-2">Fotos</h6>
+                <h6 class="col-12 mt-2">Fotos do Produto</h6>
 
                 <div class="col-6 mb-3">
-                    <input class="form-control" type="file" id="image_input" @change="handleImages">
+                    <input class="form-control" type="file" accept="image/jpeg" multiple id="image_input"
+                           @change="handleImages">
                 </div>
 
-                <div class="col-12 mt-3 d-flex flex-wrap">
-                    <div v-for="(imageUrl, index) in images" :key="index" class="col-xl-4 col-lg-6 col-12">
-                        <div class="p-3">
-                            <div class="card">
-                                <img :src="imageUrl" class="card-img-top" alt="Imagem">
-                                <div class="card-body">
-                                    <p class="card-text">{{ index === 0 ? 'Capa' : "Foto" + (index + 1) }}</p>
+                <draggable class="d-flex flex-wrap" v-model="form.images" @start="drag=true" @end="drag=false"
+                           item-key="order">
+                    <template #item="{element : image, index}">
+                        <div class="col-xl-4 col-lg-6 col-12">
+                            <div class="p-3">
+                                <div class="card">
+                                    <img v-if="image.id" :src="'/storage/' + image.path" class="card-img-top"
+                                         alt="Imagem">
+                                    <img v-else :src="image.url" class="card-img-top" alt="Imagem">
+                                    <div class="card-body">
+                                        <p class="card-text">Ordem : {{ index + 1 }}</p>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <button v-if="image.id" @click.prevent="destroyImage(image)" title="Deletar"
+                                                class="btn btn-danger mx-2">
+                                            Excluir
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </template>
+                </draggable>
 
             </div>
         </FormCRUD>

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 composer install
 
 php artisan config:clear

@@ -20,12 +20,17 @@ class Repository
         return $model;
     }
 
+    public function modelWithRelations(Model $model, array $relations): Model
+    {
+        return $model->load($relations);
+    }
+
     public function destroyModel(Model $model): void
     {
         $model->delete();
     }
 
-    public function syncManyToManyRelations($relation, array $ids)
+    public function syncManyToManyRelations($relation, array $ids): void
     {
         $relation->sync($ids);
     }

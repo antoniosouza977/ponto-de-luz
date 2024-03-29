@@ -12,7 +12,6 @@ export default {
         SideBar,
         Body
     },
-    methods: {}
 }
 </script>
 

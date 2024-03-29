@@ -36,11 +36,4 @@ class ProductStoreRequest extends FormRequest
         ];
     }
 
-    public function passedValidation(): void
-    {
-        $price = Str::replace('.','', $this->input('price'));
-        $price = ['price' => (float) Str::replace(',','.', $this->input('price'))];
-        $this->replace(array_merge($this->except('price'), $price));
-    }
-
 }

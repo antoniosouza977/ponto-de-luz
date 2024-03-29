@@ -9,10 +9,11 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import Toast from "vue-toastification";
-import "vue-toastification/dist/index.css";
 import VueSelect from "vue-select";
 import VueSweetalert2 from 'vue-sweetalert2';
+import "vue-toastification/dist/index.css";
 import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 
 

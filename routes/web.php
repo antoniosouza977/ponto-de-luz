@@ -29,8 +29,13 @@ Route::group([
         'prefix' => 'produtos',
         'as' => 'products.'
     ], function () {
+        Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::get('/novo', [ProductController::class, 'showNewProductForm'])->name('create');
         Route::post('/novo', [ProductController::class, 'storeNewProduct'])->name('store');
+        Route::get('/editar-produto/{product}', [ProductController::class, 'showEditProductForm'])->name('edit');
+        Route::post('/editar-produto/{product}', [ProductController::class, 'updateProduct'])->name('update');
+        Route::post('/remover-produto/{product}', [ProductController::class, 'destroyProduct'])->name('destroy');
+        Route::post('/remover-imagem/{image}', [ProductController::class, 'destroyImage'])->name('destroy.image');
     });
 
     Route::group([
