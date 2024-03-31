@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\FlavorController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductTypeController;
@@ -60,6 +61,18 @@ Route::group([
         Route::get('/editar-categoria/{category}', [ProductCategoryController::class, 'showEditCategoryForm'])->name('edit');
         Route::post('/editar-categoria/{category}', [ProductCategoryController::class, 'updateCategory'])->name('update');
         Route::post('/remover-categoria/{category}', [ProductCategoryController::class, 'destroyCategory'])->name('destroy');
+    });
+
+    Route::group([
+        'prefix' => 'aromas',
+        'as' => 'flavors.'
+    ], function () {
+        Route::get('/', [FlavorController::class, 'index'])->name('index');
+        Route::get('/novo', [FlavorController::class, 'showNewFlavorForm'])->name('create');
+        Route::get('/editar-aroma/{flavor}', [FlavorController::class, 'showEditFlavorForm'])->name('edit');
+        Route::post('/novo', [FlavorController::class, 'storeFlavor'])->name('store');
+        Route::post('/editar-aroma/{flavor}', [FlavorController::class, 'updateFlavor'])->name('update');
+        Route::post('/remover-aroma/{flavor}', [FlavorController::class, 'destroyFlavor'])->name('destroy');
     });
 });
 

@@ -1,5 +1,5 @@
 <script>
-import Header from "@/Components/Admin/Header.vue";
+import Header from "@/Components/Admin/Dashboard/Header.vue";
 export default {
     name: "Body",
     components: {Header}

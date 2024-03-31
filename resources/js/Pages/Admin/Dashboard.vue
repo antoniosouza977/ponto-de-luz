@@ -1,8 +1,8 @@
 <script>
-import Header from "@/Components/Admin/Header.vue";
-import SideBar from "@/Components/Admin/SideBar.vue";
-import Body from "@/Components/Admin/Body.vue";
-import Main from "@/Components/Admin/Main.vue";
+import Header from "@/Components/Admin/Dashboard/Header.vue";
+import SideBar from "@/Components/Admin/Dashboard/SideBar.vue";
+import Body from "@/Components/Admin/Dashboard/Body.vue";
+import Main from "@/Components/Admin/Dashboard/Main.vue";
 
 export default {
     name: "Dashboard",

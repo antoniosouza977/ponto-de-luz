@@ -1,18 +1,18 @@
 <script>
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
-import FormCRUD from "@/Components/CRUD/FormCRUD.vue";
+import FormCRUD from "@/Components/Admin/CRUD/FormCRUD.vue";
 import {useForm} from "@inertiajs/vue3";
 import {vMaska} from "maska";
 import VueSelect from "vue-select";
-import TrashIcon from "@/Components/CRUD/TrashIcon.vue";
+import TrashIcon from "@/Components/Admin/CRUD/TrashIcon.vue";
 import draggable from "vuedraggable";
-import { useToast } from "vue-toastification";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "ProductForm",
     directives: {maska: vMaska},
     components: {TrashIcon, Dashboard, FormCRUD, VueSelect, draggable},
-    props: ['action', 'categories', 'formRoute', 'product'],
+    props: ['action', 'categories', 'flavors', 'formRoute', 'product'],
     data() {
         return {
             toast: useToast(),
@@ -29,7 +29,12 @@ export default {
                 price: this.product ? this.product.price : null,
                 stock_quantity: this.product ? this.product.stock_quantity : null,
                 status: this.product ? this.product.status : 'available',
-                categories_ids: this.product ? this.product.categories : [],
+                categories_ids: this.product && this.product.categories.length ? this.product.categories.map(element => {
+                    return element.id
+                }) : null,
+                flavors_ids: this.product && this.product.flavors.length ? this.product.flavors.map(element => {
+                    return element.id
+                }) : null,
                 images: this.product ? this.product.images : []
             }),
             successMessage: 'Produto Salvo com Sucesso!'
@@ -74,6 +79,14 @@ export default {
                         })
                 }
             });
+        },
+        removeImageFromList(image_index) {
+            this.form.images.splice(image_index, 1);
+        },
+        selectAllFlavors() {
+            this.form.flavors_ids = this.flavors.map(flavor => {
+                return flavor.id
+            })
         }
     }
 }
@@ -118,17 +131,6 @@ export default {
                     </div>
                 </div>
 
-                <div class="col-xl-6 col-12 mb-3">
-                    <div class="form-floating">
-                        <textarea class="form-control" type="text" id="description" style="height: 100px"
-                                  v-model="form.description"></textarea>
-                        <label class="form-label" for="description">Descrição</label>
-                        <div style="height: 15px" class="text-danger">
-                            <div v-if="form.errors.name">{{ form.errors.description }}</div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="col-xl-3 col-md-6 col-sm-12 mb-3" style="height: 58px;">
                     <label class="m-0">Status</label>
                     <select class="form-select" aria-label="Status" v-model="form.status">
@@ -143,6 +145,33 @@ export default {
                     <label class="m-0">Categoria</label>
                     <vue-select multiple :options="categories" label="name" :reduce="category => category.id"
                                 placeholder="Selecione..." v-model="form.categories_ids"/>
+                    <div style="height: 15px" class="text-danger">
+                        <div v-if="form.errors.categories_ids">{{ form.errors.categories_ids }}</div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6 col-12 mb-3" style="height: 58px;">
+                    <label class="m-0">Aromas</label>
+                    <vue-select multiple :options="flavors" label="name" :reduce="flavor => flavor.id"
+                                placeholder="Selecione..." v-model="form.flavors_ids"/>
+                    <div style="height: 15px" class="text-danger">
+                        <div v-if="form.errors.flavors_ids">{{ form.errors.flavors_ids }}</div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6 col-12 mb-3 d-flex align-items-end" style="height: 58px;">
+                    <button @click.prevent="selectAllFlavors"  class="btn btn-primary">Selecionar todos</button>
+                </div>
+
+                <div class="col-xl-6 col-12 my-3">
+                    <div class="form-floating">
+                        <textarea class="form-control" type="text" id="description" style="height: 100px"
+                                  v-model="form.description"></textarea>
+                        <label class="form-label" for="description">Descrição</label>
+                        <div style="height: 15px" class="text-danger">
+                            <div v-if="form.errors.description">{{ form.errors.description }}</div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -170,7 +199,12 @@ export default {
                                     <div class="card-footer d-flex justify-content-end">
                                         <button v-if="image.id" @click.prevent="destroyImage(image)" title="Deletar"
                                                 class="btn btn-danger mx-2">
-                                            Excluir
+                                            Remover Imagem
+                                        </button>
+                                        <button v-else @click.prevent="removeImageFromList(index)"
+                                                title="Remover da Lista"
+                                                class="btn btn-warning mx-2">
+                                            Remover da Lista
                                         </button>
                                     </div>
                                 </div>

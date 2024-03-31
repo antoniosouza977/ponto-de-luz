@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
+use App\Models\Flavor;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
@@ -11,8 +13,6 @@ use App\Services\Eloquent\ProductQueryBuilder;
 use App\Services\Repository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Response;
 
@@ -38,7 +38,7 @@ class ProductController extends Controller
         $newBtn = 'Novo Produto';
         $newRoute = route('products.create');
 
-        $products = $this->productQueryBuilder->build(new Product(), ['images', 'categories'], $request->all());
+        $products = $this->productQueryBuilder->build(new Product(), ['images', 'categories', 'flavors'], $request->all(), true, 6);
 
         return inertia()->render('Admin/Products/ProductIndex', compact('action', 'newRoute', 'newBtn', 'products'));
     }
@@ -46,26 +46,30 @@ class ProductController extends Controller
     public function showNewProductForm(): Response
     {
         $action = 'Cadastrar Novo Produto';
-        $categories = ProductCategory::all();
+        $categories = $this->repository->getAllModelsFrom(new ProductCategory());
+        $flavors = $this->repository->getAllModelsFrom(new Flavor());
         $formRoute = route('products.store');
 
-        return inertia()->render('Admin/Products/ProductForm', compact('action', 'categories', 'formRoute'));
+        return inertia()->render('Admin/Products/ProductForm', compact('action', 'categories', 'formRoute', 'flavors'));
     }
 
     public function showEditProductForm(Product $product): Response
     {
-        $action = 'Editar Produto ' . $product->name;
-        $categories = ProductCategory::all();
+        $action = 'Editar Produto: ' . $product->name;
+        $categories = $this->repository->getAllModelsFrom(new ProductCategory());
+        $flavors = $this->repository->getAllModelsFrom(new Flavor());
         $formRoute = route('products.update', $product);
-        $product = $this->repository->modelWithRelations($product, ['images', 'categories']);
+        $product = $this->repository->modelWithRelations($product, ['images', 'categories', 'flavors']);
 
-        return inertia()->render('Admin/Products/ProductForm', compact('action', 'categories', 'formRoute', 'product'));
+        return inertia()->render('Admin/Products/ProductForm', compact('action', 'categories', 'formRoute', 'product', 'flavors'));
     }
 
-    public function updateProduct(ProductStoreRequest $request, Product $product): \Illuminate\Http\RedirectResponse
+    public function updateProduct(ProductUpdateRequest $request, Product $product): \Illuminate\Http\RedirectResponse
     {
         $product = $this->repository->updateOrStoreModel($request->all(), $product);
         $this->saveProductImages($product, $request['images'] ?? []);
+        $this->repository->syncManyToManyRelations($product->categories(), $request['categories_ids']);
+        $this->repository->syncManyToManyRelations($product->flavors(), $request['flavors_ids']);
 
         return redirect()->route('products.index');
     }
@@ -73,9 +77,9 @@ class ProductController extends Controller
     public function storeNewProduct(ProductStoreRequest $request): \Illuminate\Http\RedirectResponse
     {
         $product = $this->repository->updateOrStoreModel($request->except('images'), new Product);
-        $this->repository->syncManyToManyRelations($product->categories(), $request['categories_ids']);
-
         $this->saveProductImages($product, $request['images'] ?? []);
+        $this->repository->syncManyToManyRelations($product->categories(), $request['categories_ids']);
+        $this->repository->syncManyToManyRelations($product->flavors(), $request['flavors_ids']);
 
         return redirect()->route('products.index');
     }
@@ -83,9 +87,12 @@ class ProductController extends Controller
     public function destroyProduct(Product $product): \Illuminate\Http\RedirectResponse
     {
         $product->images()->delete();
+        $product->flavors()->detach();
+        $product->categories()->detach();
+        Storage::disk('public')->deleteDirectory('product_images/product_id_' . $product->id);
         $product->delete();
 
-        return back();
+        return redirect()->route('products.index');
     }
 
     public function destroyImage(ProductImage $image)
@@ -105,7 +112,7 @@ class ProductController extends Controller
             if (isset($img['id'])) {
                 ProductImage::query()->find($img['id'])->update(['view_order' => $key]);
             } else {
-                $path = Storage::disk('public')->putFile('products/imgs', $img['file']);
+                $path = Storage::disk('public')->putFile('product_images/product_id_' . $product->id . '/', $img['file']);
                 ProductImage::create([
                     'path' => $path,
                     'view_order' => $key,

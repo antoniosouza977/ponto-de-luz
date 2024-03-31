@@ -1,11 +1,11 @@
 <script>
-import Header from "@/Components/Header.vue";
-import SliderHome from "@/Components/SliderHome.vue";
-import Shop from "@/Components/Shop.vue";
-import WhySection from "@/Components/WhySection.vue";
-import Contact from "@/Components/Contact.vue";
-import ClientSection from "@/Components/ClientSection.vue";
-import Info from "@/Components/Info.vue";
+import Header from "@/Components/Shop/Header.vue";
+import SliderHome from "@/Components/Shop/SliderHome.vue";
+import Shop from "@/Components/Shop/Shop.vue";
+import WhySection from "@/Components/Shop/WhySection.vue";
+import Contact from "@/Components/Shop/Contact.vue";
+import ClientSection from "@/Components/Shop/ClientSection.vue";
+import Info from "@/Components/Shop/Info.vue";
 
 export default {
     name: "Home",

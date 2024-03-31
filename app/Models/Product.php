@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -30,8 +28,13 @@ class Product extends Model
 
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(ProductCategory::class, 'categories_products', 'product_id', 'category_id')
+        return $this->belongsToMany(ProductCategory::class, 'category_product', 'product_id', 'category_id')
             ->withTimestamps();
+    }
+
+    public function flavors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Flavor::class, 'flavor_product', 'product_id', 'flavor_id')->withTimestamps();
     }
 
     public function images(): \Illuminate\Database\Eloquent\Relations\HasMany

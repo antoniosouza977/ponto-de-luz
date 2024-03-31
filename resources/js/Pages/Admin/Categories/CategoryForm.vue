@@ -1,5 +1,5 @@
 <script>
-import FormCRUD from "@/Components/CRUD/FormCRUD.vue";
+import FormCRUD from "@/Components/Admin/CRUD/FormCRUD.vue";
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
 import {useForm} from "@inertiajs/vue3";
 

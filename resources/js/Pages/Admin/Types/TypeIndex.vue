@@ -1,8 +1,8 @@
 <script>
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
-import IndexCRUD from "@/Components/CRUD/IndexCRUD.vue";
+import IndexCRUD from "@/Components/Admin/CRUD/IndexCRUD.vue";
 import {Link} from "@inertiajs/vue3";
-import TrashIcon from "@/Components/CRUD/TrashIcon.vue";
+import TrashIcon from "@/Components/Admin/CRUD/TrashIcon.vue";
 
 export default {
     name: "TypeIndex",

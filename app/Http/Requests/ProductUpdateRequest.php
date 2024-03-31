@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
-class ProductStoreRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
 
     public function authorize(): true
@@ -16,12 +16,12 @@ class ProductStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:50|unique:products',
+            'name' => 'required|max:50',
             'price' => 'required',
             'stock_quantity' => 'required',
             'status' => 'required',
             'categories_ids' => 'array',
-            'flavors_ids' => 'array'
+            'flavors_ids' => 'array',
         ];
     }
 
@@ -29,7 +29,6 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'name.required' => 'Nome obrigatório.',
-            'name.unique' => 'Produto já existe',
             'name.max' => 'O nome deve ter no máximo :max caracteres.',
             'price.required' => 'Preço obrigatório.',
             'stock_quantity.required' => 'Estoque obrigatório.',

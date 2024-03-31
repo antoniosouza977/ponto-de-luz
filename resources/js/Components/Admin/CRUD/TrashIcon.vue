@@ -1,11 +1,13 @@
 <script>
 import {useForm} from "@inertiajs/vue3";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "TrashIcon",
     props: ['model', 'formRoute', 'btn'],
     data() {
         return {
+            toast: useToast(),
             form: useForm(this.model)
         }
     },

@@ -54,20 +54,20 @@ class ProductCategoryController extends Controller
     {
         $this->repository->updateOrStoreModel($request->all(), $category);
 
-        return redirect(route('categories.index'));
+        return redirect()->route('categories.index');
     }
 
     public function storeCategory(ProductCategoryStoreRequest $request): RedirectResponse
     {
         $this->repository->updateOrStoreModel($request->all(), new ProductCategory());
 
-        return redirect()->back();
+        return redirect()->route('categories.index');
     }
 
     public function destroyCategory(ProductCategory $category): RedirectResponse
     {
         $this->repository->destroyModel($category);
 
-        return redirect()->back();
+        return redirect()->route('categories.index');
     }
 }
