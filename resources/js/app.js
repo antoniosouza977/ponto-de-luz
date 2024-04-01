@@ -9,7 +9,6 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import Toast from "vue-toastification";
-import VueSelect from "vue-select";
 import VueSweetalert2 from 'vue-sweetalert2';
 import PrimeVue from 'primevue/config';
 import "vue-toastification/dist/index.css";
@@ -34,7 +33,6 @@ createInertiaApp({
             })
             .use(VueSweetalert2)
             .use(ZiggyVue, Ziggy)
-            .use(VueSelect)
             .use(PrimeVue)
             .mount(el);
     },

@@ -56,25 +56,9 @@ export default {
         },
         dragging(event) {
             event.item.classList.add('ghost')
-            event.to.children.forEach(child => {
-                if (child.classList.contains('dragged')) {
-                    child.classList.remove('dragged')
-                }
-
-            })
         },
         dragged(event) {
             event.item.classList.remove('ghost')
-            event.to.children.forEach(child => {
-                if (child.classList.contains('dragging')) {
-                    child.classList.remove('dragging')
-                    child.classList.add('dragged')
-                }
-
-            })
-        },
-        moving(event) {
-            event.related.classList.add('dragging')
         }
     }
 }
@@ -91,8 +75,8 @@ export default {
 
         <draggable
             v-model="form.images"
+            animation="300"
             @start="dragging"
-            @move="moving"
             @end="dragged"
             class="d-flex flex-wrap p-3"
             item-key="order"
@@ -126,19 +110,8 @@ export default {
 
 <style scoped>
 .ghost {
-    opacity: 0.01;
-}
-
-.dragging {
-    opacity: 0.3;
-}
-
-.dragged {
-    opacity: 1;
-}
-
-.dg-item {
-    transition: opacity 0.2s;
+    opacity: 0;
+    transition: opacity 0.1s;
 }
 
 .card-img-top {

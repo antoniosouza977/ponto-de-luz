@@ -36,7 +36,7 @@ export default {
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <Link class="nav-link" href="/public">
+            <Link class="nav-link" href="/">
                 <i class="bi bi-cart fs-6"></i>
                 <span class="fs-6">Loja</span>
             </Link>
