@@ -7,22 +7,9 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-        <!-- Custom styles for this template -->
-        <link href="{{asset('css/style.css')}}" rel="stylesheet" />
-        <!-- responsive style -->
-        <link href="{{asset('css/responsive.css')}}" rel="stylesheet" />
-
-        <!-- Custom fonts for this template-->
-        <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-        <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
+        @vite('resources/css/app.css')
+
         @routes
         @inertiaHead
     </head>
@@ -30,12 +17,6 @@
         @inertia
     </body>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
+{{--    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>--}}
 
 </html>

@@ -38,9 +38,9 @@ export default {
 </script>
 
 <template>
-    <button v-if="btn" @click.prevent="destroyModel" title="Deletar" class="btn btn-danger mx-2">
+    <Button v-if="btn" @click.prevent="destroyModel" title="Deletar" severity="danger" rounded class="mx-3">
         Excluir
-    </button>
+    </Button>
     <a v-else href="#" @click.prevent="destroyModel" title="Deletar" class="bi bi-trash3 text-danger mx-3 fs-4"></a>
 </template>
 

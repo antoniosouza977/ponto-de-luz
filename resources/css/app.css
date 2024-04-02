@@ -1,4 +1,19 @@
-@import url('../../node_modules/bootstrap/scss/bootstrap.scss');
-@import url('../../node_modules/bootstrap-icons/font/bootstrap-icons.css');
-@import url('../../node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css');
 @import "vue-select/dist/vue-select.css";
+@import "flags.css";
+@import "style.css";
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer tailwind-base, primevue, tailwind-utilities;
+
+@layer tailwind-base {
+    @tailwind base;
+}
+
+@layer tailwind-utilities {
+    @tailwind components;
+    @tailwind utilities;
+}

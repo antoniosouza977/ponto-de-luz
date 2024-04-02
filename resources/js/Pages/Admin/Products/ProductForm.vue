@@ -2,23 +2,17 @@
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
 import FormCRUD from "@/Components/Admin/CRUD/FormCRUD.vue";
 import {useForm} from "@inertiajs/vue3";
-import {vMaska} from "maska";
 import VueSelect from "vue-select";
 import TrashIcon from "@/Components/Admin/CRUD/TrashIcon.vue";
 import DraggImageComponent from "@/Components/Admin/CRUD/Products/DraggImageComponent.vue";
 
 export default {
     name: "ProductForm",
-    directives: {maska: vMaska},
     components: {DraggImageComponent, TrashIcon, Dashboard, FormCRUD, VueSelect},
     props: ['action', 'categories', 'flavors', 'formRoute', 'product'],
     data() {
         return {
             images: [],
-            priceMask: {
-                mask: "###.###.###,##",
-                reversed: true
-            },
             form: useForm({
                 id: this.product ? this.product.id : null,
                 name: this.product ? this.product.name : null,
@@ -67,7 +61,7 @@ export default {
 
                 <div class="col-xl-3 col-md-6 col-sm-12 mb-3">
                     <div class="form-floating">
-                        <input class="form-control" type="text" id="price" v-maska:[priceMask]
+                        <input class="form-control" type="text" id="price"
                                v-model="form.price">
                         <label class="form-label" for="price">Preço</label>
                         <div style="height: 15px" class="text-danger">

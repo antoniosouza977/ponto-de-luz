@@ -2,12 +2,10 @@
 import Header from "@/Components/Admin/Dashboard/Header.vue";
 import SideBar from "@/Components/Admin/Dashboard/SideBar.vue";
 import Body from "@/Components/Admin/Dashboard/Body.vue";
-import Main from "@/Components/Admin/Dashboard/Main.vue";
 
 export default {
     name: "Dashboard",
     components: {
-        Main,
         Header,
         SideBar,
         Body
@@ -16,24 +14,20 @@ export default {
 </script>
 
 <template>
+    <div class="container bg-gray-900 min-h-screen min-w-full">
+        <div class="sticky top-0 z-50 px-3">
+            <Header></Header>
+        </div>
+        <div class="p-3 relative">
+            <slot></slot>
+        </div>
 
-    <Main>
-        <div id="pageBody">
-            <div id="wrapper">
+    </div>
+    <!--            <SideBar></SideBar>-->
 
-                <SideBar></SideBar>
+    <!--            <Body>-->
+    <!--            <slot></slot>-->
+    <!--            </Body>-->
 
-                <Body>
-                    <slot></slot>
-                </Body>
-
-
-            </div>
-
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a></div>
-
-    </Main>
 
 </template>

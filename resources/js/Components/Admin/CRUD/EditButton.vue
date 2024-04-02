@@ -9,8 +9,8 @@ export default {
 </script>
 
 <template>
-    <Link v-if="btn" :href="editRoute" class="btn btn-warning mx-2">
-        Editar
+    <Link v-if="btn" :href="editRoute">
+        <Button label="Editar" severity="warning" rounded class="mx-3" />
     </Link>
     <Link v-else :href="editRoute"><i title="Editar" class="bi bi-pencil-square text-warning mx-3"></i></Link>
 </template>

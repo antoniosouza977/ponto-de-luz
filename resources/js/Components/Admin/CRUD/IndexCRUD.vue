@@ -1,33 +1,31 @@
 <script>
 import {Link} from "@inertiajs/vue3";
+
 export default {
     name: "IndexCRUD",
-    components : {Link},
+    components: {Link},
     props: ['action', 'newBtn', 'newRoute']
 }
 </script>
 
 <template>
 
-    <div class="col-12">
-        <div class="card shadow mb-4">
 
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">{{ action }}</h6>
-                <Link :href="newRoute" class="btn btn-primary">{{ newBtn }}</Link>
+    <div class="bg-white rounded-lg">
+
+        <div class="flex items-center justify-between bg-green-100 rounded-t-lg border-b border-green-200 p-3 m-0">
+            <div class="ml-3 font-bold text-lg flex items-center">
+                <span>{{ action }}</span>
             </div>
-
-            <div class="card-body">
-                <div class="d-flex flex-row flex-wrap">
-                    <slot></slot>
-                </div>
-            </div>
-
-            <div class="card-footer d-flex" style="height: 52px">
-            </div>
-
+            <Link :href="newRoute">
+                <Button :label="newBtn" icon="pi pi-plus" rounded/>
+            </Link>
         </div>
+
+        <slot></slot>
+
     </div>
+
 
 </template>
 
