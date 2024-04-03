@@ -9,7 +9,7 @@ use App\Models\Flavor;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
-use App\Services\Eloquent\ProductQueryBuilder;
+use App\Services\Eloquent\Builders\ProductQueryBuilder;
 use App\Services\Repository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -37,8 +37,9 @@ class ProductController extends Controller
         $action = 'Lista de Produtos';
         $newBtn = 'Novo Produto';
         $newRoute = route('products.create');
+        $queryParameters = $request->all();
 
-        $products = $this->productQueryBuilder->build(new Product(), ['images', 'categories', 'flavors'], $request->all(), true, 6);
+        $products = $this->productQueryBuilder->build(new Product(), ['images', 'categories', 'flavors'], $queryParameters, true, 6);
 
         return inertia()->render('Admin/Products/ProductIndex', compact('action', 'newRoute', 'newBtn', 'products'));
     }

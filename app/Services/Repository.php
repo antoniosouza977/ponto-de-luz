@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Repository
 {
-    public function getAllModelsFrom(Model $model): Collection
+    public function getAllModelsFrom(Model $model, array $columns = null): Collection
     {
+        if ($columns) {
+            return $model->newQuery()->select($columns)->get();
+        }
         return $model::all();
     }
 
