@@ -26,9 +26,11 @@ export default {
                             }
                         },
                         {
-                            label: 'Blocks',
-                            icon: 'pi pi-server',
-                            shortcut: '⌘+B'
+                            label: 'Categorias',
+                            icon: 'pi pi-hashtag',
+                            command: () => {
+                                router.get(route('categories.index'))
+                            }
                         },
                         {
                             label: 'UI Kit',

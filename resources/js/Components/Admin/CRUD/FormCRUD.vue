@@ -19,7 +19,7 @@ export default {
                     vue.toast.success(vue.successMessage)
                 },
                 onError: () => {
-                    setTimeout(() => vue.form.clearErrors(), 2000)
+                    setTimeout(() => vue.form.clearErrors(), 3000)
                 },
             })
 
