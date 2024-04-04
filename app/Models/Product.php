@@ -21,7 +21,6 @@ class Product extends Model
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => number_format($value, 2, ',', '.'),
             set: fn($value) => currencyToFloat($value)
         );
     }

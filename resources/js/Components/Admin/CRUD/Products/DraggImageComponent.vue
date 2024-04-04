@@ -1,6 +1,7 @@
 <script>
 import draggable from "vuedraggable";
 import {useToast} from "vue-toastification";
+import axios from "axios";
 
 export default {
     name: "DraggImageComponent",
@@ -55,6 +56,7 @@ export default {
             this.form.images.splice(image_index, 1);
         },
         dragging(event) {
+            console.log(event.clone)
             event.item.classList.add('ghost')
         },
         dragged(event) {
@@ -65,12 +67,14 @@ export default {
 </script>
 
 <template>
-    <div class="d-flex flex-wrap border rounded mt-3">
-        <h6 class="col-12 mt-2">Fotos do Produto</h6>
+    <div class="flex flex-wrap border border-green-200 rounded my-3">
+        <h6 class="w-full mb-2 font-bold border-b border-green-200 p-3">Fotos do Produto</h6>
 
-        <div class="col-6 mb-3">
-            <input class="form-control" type="file" accept="image/jpeg" multiple id="image_input"
-                   @change="handleImages">
+        <div class="p-3">
+            <label for="images_input" class="font-medium text-white p-2 rounded hover:bg-green-400 bg-green-500 cursor-pointer active:shadow-none shadow-md">
+                Selecione as Imagens
+            </label>
+            <input type="file" accept="image/jpeg" multiple id="images_input" @change="handleImages">
         </div>
 
         <draggable
@@ -78,28 +82,24 @@ export default {
             animation="300"
             @start="dragging"
             @end="dragged"
-            class="d-flex flex-wrap p-3"
+            class="flex flex-wrap mt-3"
             item-key="order"
         >
             <template #item="{element : image, index}">
-                <div class="col-xl-4 col-lg-6 col-12 p-1 dg-item">
-                    <div class="card">
-                        <img v-if="image.id" :src="'/storage/' + image.path" class="card-img-top"
-                             alt="Imagem">
-                        <img v-else :src="image.url" class="card-img-top" alt="Imagem">
-                        <div class="card-body">
-                            <p class="card-text">Ordem : {{ index + 1 }}</p>
+                <div class="2xl:w-1/4 xl:w-1/3 md:w-1/2 w-full p-3 dg-item">
+                    <img v-if="image.id" :src="'/storage/' + image.path" class="rounded-t"
+                         alt="Imagem">
+                    <img v-else :src="image.url" class="rounded-t" alt="Imagem">
+                    <div class="border border-green-200 p-3 m-0 bg-white rounded-b">
+                        <div>
+                            <span class="font-bold">Ordem :</span>
+                            {{ index + 1 }}
                         </div>
-                        <div class="card-footer d-flex justify-content-end">
-                            <button v-if="image.id" @click.prevent="destroyImage(image)" title="Deletar"
-                                    class="btn btn-danger mx-2">
-                                Remover Imagem
-                            </button>
-                            <button v-else @click.prevent="removeImageFromList(index)"
-                                    title="Remover da Lista"
-                                    class="btn btn-warning mx-2">
-                                Remover da Lista
-                            </button>
+                        <div class="flex justify-end">
+                            <Button v-if="image.id" @click.prevent="destroyImage(image)" severity="danger"
+                                    title="Deletar" label="Remover Imagem"/>
+                            <Button v-else @click.prevent="removeImageFromList(index)" severity="warning"
+                                    label="Remover da Lista"/>
                         </div>
                     </div>
                 </div>
@@ -117,4 +117,9 @@ export default {
 .card-img-top {
     cursor: move;
 }
+
+input[type="file"] {
+    display: none;
+}
+
 </style>

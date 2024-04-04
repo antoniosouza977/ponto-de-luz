@@ -1,6 +1,6 @@
 <script>
 import {Link} from "@inertiajs/vue3";
-
+import {router} from "@inertiajs/vue3";
 
 export default {
     name: "Paginator",
@@ -17,6 +17,19 @@ export default {
             }
 
             return label;
+        },
+        changePage(link) {
+            const params = {...route().params}
+            const paramsSize = Object.keys(params).length
+
+            if (paramsSize === 1 && route().params.page || paramsSize === 0) return router.get(link.url)
+
+            params.page = this.getPage(link.url)
+
+            return router.get(window.location.pathname, params)
+        },
+        getPage(url) {
+            return url.match(/page=\d+/g)[0].match(/page=(\d+)/)[1];
         }
     }
 }
@@ -26,22 +39,9 @@ export default {
 
     <div class="w-full flex items-center justify-center p-3">
         <template v-for="link in links">
-            <Link :href="link.url ? link.url : '#'">
-                <Button :class="{'bg-slate-300' : link.active}" :disabled="link.url === null" :label="getLabel(link.label)" severity="secondary" rounded/>
-            </Link>
+            <Button @click.prevent="changePage(link)" :class="{'bg-slate-300' : link.active}" :disabled="link.url === null" :label="getLabel(link.label)"
+                    severity="secondary" rounded/>
         </template>
     </div>
-    <!--            <li class="page-item" :class="{disabled: link.url === null, active: link.active}" v-for="link in links">-->
-    <!--               <Link v-if="getLabel(link.label) === 'Anterior'" class="page-link" aria-label="Previous" :href="link.url ? link.url : '#'">-->
-    <!--                   <span aria-hidden="true">&laquo;</span>-->
-    <!--                   <span class="sr-only">Previous</span>-->
-    <!--               </Link>-->
-    <!--                <Link v-if="getLabel(link.label) === 'Próxima'" class="page-link" aria-label="Next" :href="link.url ? link.url : '#'">-->
-    <!--                    <span aria-hidden="true">&raquo;</span>-->
-    <!--                    <span class="sr-only">Next</span>-->
-    <!--                </Link>-->
-    <!--                <Link v-if="!'Anterior Próxima'.includes(getLabel(link.label))" class="page-link" aria-label="Next" :href="link.url ? link.url : '#'">-->
-    <!--                    {{ getLabel(link.label) }}-->
-    <!--                </Link>-->
 
 </template>

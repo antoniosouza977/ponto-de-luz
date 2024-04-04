@@ -72,7 +72,9 @@ export default {
                           optionLabel="name" optionValue="id" class="w-full my-3"/>
             </div>
         </Sidebar>
-        <Button icon="pi pi-search" @click="getFilters" label="Buscar Produtos" :loading="gettingFilters"/>
+        <div class="w-full flex justify-end">
+            <Button icon="pi pi-search" @click="getFilters" label="Buscar Produtos" :loading="gettingFilters"/>
+        </div>
     </div>
 </template>
 
