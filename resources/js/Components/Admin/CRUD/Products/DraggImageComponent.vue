@@ -67,10 +67,10 @@ export default {
 </script>
 
 <template>
-    <div class="flex flex-wrap border border-green-200 rounded my-3">
-        <h6 class="w-full mb-2 font-bold border-b border-green-200 p-3">Fotos do Produto</h6>
+    <div class="flex flex-wrap border border-green-200 rounded">
+        <h6 class="w-full font-bold border-green-200 p-3">Fotos do Produto</h6>
 
-        <div class="p-3">
+        <div class="p-3 mb-3">
             <label for="images_input" class="font-medium text-white p-2 rounded hover:bg-green-400 bg-green-500 cursor-pointer active:shadow-none shadow-md">
                 Selecione as Imagens
             </label>
@@ -86,11 +86,11 @@ export default {
             item-key="order"
         >
             <template #item="{element : image, index}">
-                <div class="2xl:w-1/4 xl:w-1/3 md:w-1/2 w-full p-3 dg-item">
-                    <img v-if="image.id" :src="'/storage/' + image.path" class="rounded-t"
+                <div class="2xl:w-1/4 xl:w-1/3 md:w-1/2 w-full p-3 mb-3 dg-item">
+                    <img v-if="image.id" :src="'/storage/' + image.path" class="rounded-t card-img-top"
                          alt="Imagem">
-                    <img v-else :src="image.url" class="rounded-t" alt="Imagem">
-                    <div class="border border-green-200 p-3 m-0 bg-white rounded-b">
+                    <img v-else :src="image.url" class="rounded-t card-img-top" alt="Imagem">
+                    <div class="border drop-shadow-md border-green-300 p-3 m-0 bg-white rounded-b">
                         <div>
                             <span class="font-bold">Ordem :</span>
                             {{ index + 1 }}

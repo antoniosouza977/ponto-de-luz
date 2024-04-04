@@ -58,8 +58,8 @@ export default {
     <div class="p-3 flex justify-content-center">
         <Sidebar v-model:visible="sidebar_visible" header="Buscar Produtos">
             <div class="w-full flex justify-end my-3">
-                <Button icon="pi pi-refresh" class="mx-3" title="Limpar Busca" @click="resrtQuery()"/>
-                <Button icon="pi pi-search" title="Filtrar" @click="doQuery()"/>
+                <Button icon="pi pi-refresh" class="mx-3" title="Limpar Busca" @click="resrtQuery()" rounded/>
+                <Button icon="pi pi-search" title="Filtrar" @click="doQuery()" rounded/>
             </div>
             <div class="border border-green-200 p-3 rounded-lg mb-3">
                 <label class="font-bold" for="category_id">Categoria</label>
@@ -73,7 +73,7 @@ export default {
             </div>
         </Sidebar>
         <div class="w-full flex justify-end">
-            <Button icon="pi pi-search" @click="getFilters" label="Buscar Produtos" :loading="gettingFilters"/>
+            <Button icon="pi pi-search" @click="getFilters" :loading="gettingFilters" rounded/>
         </div>
     </div>
 </template>

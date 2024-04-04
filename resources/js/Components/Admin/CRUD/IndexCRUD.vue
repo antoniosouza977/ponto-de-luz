@@ -13,7 +13,7 @@ export default {
 
     <div class="bg-white rounded-lg">
 
-        <div class="flex items-center justify-between bg-green-100 rounded-t-lg border-b border-green-200 p-3 m-0">
+        <div class="flex items-center justify-between bg-gray-100 rounded-t-lg p-3 m-0">
             <div class="ml-3 font-bold text-lg flex items-center">
                 <span>{{ action }}</span>
             </div>

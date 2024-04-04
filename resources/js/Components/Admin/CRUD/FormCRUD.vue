@@ -30,7 +30,7 @@ export default {
 
 <template>
 
-    <div class="flex items-center justify-between bg-green-100 rounded-t-lg p-3">
+    <div class="flex items-center justify-between bg-gray-100 rounded-t-lg p-3">
         <h6 class="m-0 font-bold text-lg">{{ action }}</h6>
     </div>
 
@@ -38,9 +38,8 @@ export default {
         <slot></slot>
     </div>
 
-    <div class="flex bg-green-100 rounded-b-lg w-full justify-end p-3">
-        <Button @click.prevent="submitForm" :disabled="form.processing"
-                class="btn btn-primary" label="Salvar"/>
+    <div class="flex bg-gray-100 rounded-b-lg w-full justify-end p-3">
+        <Button @click.prevent="submitForm" :disabled="form.processing" label="Salvar" rounded/>
     </div>
 </template>
 

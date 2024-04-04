@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-    <div class="container bg-gray-900 min-h-screen min-w-full">
+    <div class="container bg-pl-balck min-h-screen min-w-full">
         <div class="sticky top-0 z-50 px-3">
             <Header></Header>
         </div>
