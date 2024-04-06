@@ -11,18 +11,20 @@ export default {
 <template>
 
 
-    <div class="bg-white rounded-lg">
+    <div class="p-6 bg-white rounded-lg min-h-full">
 
-        <div class="flex items-center justify-between bg-gray-100 rounded-t-lg p-3 m-0">
-            <div class="ml-3 font-bold text-lg flex items-center">
-                <span>{{ action }}</span>
+        <div class="bg-card rounded-lg">
+            <div class="flex items-center justify-between bg-title rounded-t-lg p-3 m-0">
+                <div class="ml-3 font-bold text-lg flex items-center">
+                    <span>{{ action }}</span>
+                </div>
+                <Link :href="newRoute">
+                    <Button :label="newBtn" icon="pi pi-plus" rounded/>
+                </Link>
             </div>
-            <Link :href="newRoute">
-                <Button :label="newBtn" icon="pi pi-plus" rounded/>
-            </Link>
-        </div>
 
-        <slot></slot>
+            <slot></slot>
+        </div>
 
     </div>
 

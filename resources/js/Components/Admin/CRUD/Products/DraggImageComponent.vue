@@ -67,10 +67,10 @@ export default {
 </script>
 
 <template>
-    <div class="flex flex-wrap border border-green-200 rounded">
+    <div class="flex flex-wrap border border-green-200 rounded bg-white">
         <h6 class="w-full font-bold border-green-200 p-3">Fotos do Produto</h6>
 
-        <div class="p-3 mb-3">
+        <div class="p-3 mb-3 w-full">
             <label for="images_input" class="font-medium text-white p-2 rounded hover:bg-green-400 bg-green-500 cursor-pointer active:shadow-none shadow-md">
                 Selecione as Imagens
             </label>
@@ -82,7 +82,7 @@ export default {
             animation="300"
             @start="dragging"
             @end="dragged"
-            class="flex flex-wrap mt-3"
+            class="flex flex-wrap mt-3 w-full"
             item-key="order"
         >
             <template #item="{element : image, index}">

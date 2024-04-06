@@ -7,19 +7,19 @@ export default {
             const status_label = {
                 available: {
                     label: 'Disponível',
-                    text_color: 'text-success',
+                    text_color: 'success',
                 },
                 promotion: {
                     label: 'Promoção',
-                    text_color: 'text-warning',
+                    text_color: 'warning',
                 },
                 unavailable: {
                     label: 'Indisponível',
-                    text_color: 'text-danger',
+                    text_color: 'danger',
                 },
                 'out-of-stock': {
                     label: 'Sem estoque',
-                    text_color: 'text-danger',
+                    text_color: 'danger',
                 },
             }
 
@@ -30,8 +30,8 @@ export default {
 </script>
 
 <template>
-    <div class="col-xl-5 col-gl-6 col-12 p-0">Status:
-        <span class="fw-bold" :class="this.getStatusLabel(product.status).text_color">{{ this.getStatusLabel(product.status).label }}</span>
+    <div class="md:1/2 w-full">Status:
+        <Tag style="font-size: .9rem" :severity="this.getStatusLabel(product.status).text_color" :value="this.getStatusLabel(product.status).label"></Tag>
     </div>
 </template>
 

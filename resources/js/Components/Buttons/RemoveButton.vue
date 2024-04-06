@@ -3,8 +3,8 @@ import {useForm} from "@inertiajs/vue3";
 import {useToast} from "vue-toastification";
 
 export default {
-    name: "TrashIcon",
-    props: ['model', 'formRoute', 'btn'],
+    name: "RemoveButton",
+    props: ['model', 'formRoute', 'btn', 'class'],
     data() {
         return {
             toast: useToast(),
@@ -38,9 +38,9 @@ export default {
 </script>
 
 <template>
-    <Button v-if="btn" @click.prevent="destroyModel" title="Deletar" severity="danger" rounded class="mx-3">
+    <Button v-if="btn" @click.prevent="destroyModel" title="Deletar" severity="danger" rounded>
         Excluir
     </Button>
-    <a v-else href="#" @click.prevent="destroyModel" title="Deletar" class="bi bi-trash3 text-danger mx-3 fs-4"></a>
+    <Button v-else @click.prevent="destroyModel" title="Deletar" severity="danger" rounded icon="pi pi-trash" :class="class"/>
 </template>
 

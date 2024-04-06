@@ -1,5 +1,5 @@
 <script>
-import TrashIcon from "@/Components/Admin/CRUD/TrashIcon.vue";
+import RemoveButton from "@/Components/Buttons/RemoveButton.vue";
 import IndexCRUD from "@/Components/Admin/CRUD/IndexCRUD.vue";
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
 import {Link} from "@inertiajs/vue3";
@@ -7,7 +7,7 @@ import {Link} from "@inertiajs/vue3";
 export default {
     name: "FlavorIndex",
     props: ['action', 'flavors', 'newBtn', 'newRoute'],
-    components: {TrashIcon, IndexCRUD, Dashboard, Link}
+    components: {RemoveButton, IndexCRUD, Dashboard, Link}
 }
 </script>
 
@@ -19,7 +19,7 @@ export default {
                     <div class="w-75 border-right p-2">{{ flavor.name }}</div>
                     <div class="w-25 fs-4 d-flex justify-content-end align-items-center">
                         <Link :href="route('flavors.edit', flavor)"><i title="Editar" class="bi bi-pencil-square text-warning mx-3"></i></Link>
-                        <TrashIcon :model="flavor" :form-route="route('flavors.destroy', flavor)"></TrashIcon>
+                        <RemoveButton :model="flavor" :form-route="route('flavors.destroy', flavor)"></RemoveButton>
                     </div>
                 </div>
             </div>

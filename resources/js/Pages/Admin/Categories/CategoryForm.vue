@@ -2,11 +2,12 @@
 import FormCRUD from "@/Components/Admin/CRUD/FormCRUD.vue";
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
 import {useForm} from "@inertiajs/vue3";
+import InputErrorFeedback from "@/Components/Admin/CRUD/InputErrorFeedback.vue";
 
 export default {
     name: "CategoryForm",
     props: ['action', 'formRoute', 'category', 'types'],
-    components: {FormCRUD, Dashboard},
+    components: {InputErrorFeedback, FormCRUD, Dashboard},
     data() {
         return {
             form: useForm({
@@ -23,24 +24,21 @@ export default {
 <template>
     <Dashboard>
         <FormCRUD v-bind="$props" :form="form" :formRoute="formRoute" :successMessage="successMessage">
-            <div class="d-flex flex-row flex-wrap">
+            <div class="flex flex-wrap border rounded-lg border-green-200 bg-white">
 
-                <div class="col-xl-3 col-12">
-                    <div class="form-group p-3">
-                        <label class="form-label" for="name">Nome</label>
-                        <input class="form-control" type="text" id="name" v-model="form.name">
-                        <div class="my-3 text-danger" v-if="form.errors">{{ form.errors.name }}</div>
-                    </div>
+                <div class="w-full p-3 font-bold">Dados da Categoria</div>
+
+                <div class="lg:w-1/3 md:w-1/2 w-full flex flex-col p-3">
+                    <label class="font-medium" for="name">Nome</label>
+                    <InputText id="name" v-model="form.name" class="mt-3" :invalid="form.errors.name"/>
+                    <InputErrorFeedback :error="form.errors.name" />
                 </div>
 
-                <div class="col-xl-3 col-12">
-                    <div class="form-group p-3">
-                        <label class="form-label" for="product_type_id">Tipo</label>
-                        <select class="form-select" type="text" id="product_type_id" v-model="form.product_type_id">
-                            <option v-for="type in types" :value="type.id">{{type.name}}</option>
-                        </select>
-                        <div class="my-3 text-danger" v-if="form.errors">{{ form.errors.product_type_id }}</div>
-                    </div>
+                <div class="lg:w-1/3 md:w-1/2 w-full p-3">
+                    <label class="font-medium" for="product_type_id">Tipo de Produto</label>
+                    <Dropdown inputId="product_type_id" v-model="form.product_type_id" :options="types"
+                              optionLabel="name" optionValue="id" class="w-full my-3" :invalid="form.errors.product_type_id"/>
+                    <InputErrorFeedback :error="form.errors.product_type_id" />
                 </div>
             </div>
         </FormCRUD>

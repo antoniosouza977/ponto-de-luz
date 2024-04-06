@@ -120,7 +120,7 @@ import "vue-toastification/dist/index.css";
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'primevue/resources/themes/aura-light-green/theme.css'
 
-
+import helpers from '@/helpers.js'
 
 const Name = import.meta.env.VITE_APP_NAME || 'Laravel';
 

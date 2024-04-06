@@ -1,25 +1,43 @@
 <script>
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
 import IndexCRUD from "@/Components/Admin/CRUD/IndexCRUD.vue";
-import {Link} from "@inertiajs/vue3";
-import TrashIcon from "@/Components/Admin/CRUD/TrashIcon.vue";
+import RemoveButton from "@/Components/Buttons/RemoveButton.vue";
+import EditButton from "@/Components/Buttons/EditButton.vue";
+import {router} from "@inertiajs/vue3";
 
 export default {
     name: "CategoryIndex",
     props: ['action', 'categories', 'newBtn', 'newRoute'],
-    components: {TrashIcon, IndexCRUD, Dashboard, Link}
+    components: {EditButton, RemoveButton, IndexCRUD, Dashboard},
+    methods: {
+        goToProducts(category_id) {
+            router.get(route('products.index', {
+                category_id: category_id,
+            }))
+        }
+    }
 }
 </script>
 
 <template>
     <Dashboard>
         <IndexCRUD v-bind="$props">
-            <div class="w-100">
-                <div class="my-2 shadow-sm w-100 d-flex" v-for="category in categories">
-                    <div class="w-75 border-right p-2">{{ category.name }}</div>
-                    <div class="w-25 fs-4 d-flex justify-content-end align-items-center">
-                        <Link :href="route('categories.edit', category)"><i title="Editar" class="bi bi-pencil-square text-warning mx-3"></i></Link>
-                        <TrashIcon :model="category" :form-route="route('categories.destroy', category)"></TrashIcon>
+            <div class="w-full rounded-lg p-3 min-h-full">
+                <div class="flex justify-between align-items-center border-b p-2 border-green-200 bg-white">
+                    <div class="w-1/3 font-medium">Categoria</div>
+                    <div class="text-center w-1/3 hidden md:block font-medium">Tipo de Produto</div>
+                    <div class="text-end w-1/3 font-medium"></div>
+                </div>
+
+                <div class="flex w-full py-2 border-b border-green-200 bg-white" v-for="category in categories" :key="category.id">
+                    <div class="w-1/3 pl-2 flex items-center"><span>{{ category.name }}</span></div>
+                    <div class="w-1/3 hidden md:flex justify-center items-center "><span>{{ category.type.name }}</span>
+                    </div>
+                    <div class="md:w-1/3 w-2/3 flex justify-end">
+                        <Button @click.prevent="goToProducts(category.id)" label="Produtos" severity="info" class="mr-3" rounded />
+                        <EditButton :edit-route="route('categories.edit', category)"/>
+                        <RemoveButton class="mx-3" :model="category"
+                                      :form-route="route('categories.destroy', category)"/>
                     </div>
                 </div>
             </div>

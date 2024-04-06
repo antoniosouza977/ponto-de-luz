@@ -8,10 +8,9 @@ export default {
     theme: {
         extend: {
             backgroundColor: {
-                'pl-blue' : '#89A1EF',
-                'pl-green' : '#91F5AD',
-                'pl-tomato' : '#FCB07E',
-                'pl-balck' : '#100B00',
+                'body' : '#ECEEFB',
+                'title' : '#d1f8d1',
+                'card' : '#f4fffa',
             }
         },
     },

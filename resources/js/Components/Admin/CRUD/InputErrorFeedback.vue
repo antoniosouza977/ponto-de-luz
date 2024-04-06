@@ -7,7 +7,7 @@ export default {
 
 <template>
     <div style="height: 15px" class="text-red-500 mt-1">
-        <div v-if="error">{{ error }}</div>
+        <div v-if="Boolean(error)">{{ error }}</div>
     </div>
 </template>
 
