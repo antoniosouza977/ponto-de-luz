@@ -27,7 +27,7 @@ class ProductCategoryController extends Controller
         $action = 'Lista de Categorias';
         $newBtn = 'Nova Categoria';
         $newRoute = route('categories.create');
-        $categories = $this->repository->getAllModelsFrom(new ProductCategory());
+        $categories = $this->repository->getModelsWithRelations(new ProductCategory(), ['type']);
 
         return inertia()->render('Admin/Categories/CategoryIndex', compact('action', 'categories', 'newBtn', 'newRoute'));
     }
