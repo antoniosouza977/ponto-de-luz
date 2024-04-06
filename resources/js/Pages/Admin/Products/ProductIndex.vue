@@ -8,13 +8,16 @@ import ProductStatus from "@/Components/Admin/CRUD/Products/ProductStatus.vue";
 import Paginator from '@/Components/Paginator.vue'
 import ProducstFilter from "@/Components/Admin/CRUD/Products/ProducstFilter.vue";
 import maskCurrency from "@/helpers.js";
+import FlavorTag from "@/Components/Misc/FlavorTag.vue";
 
 
 export default {
     name: "ProductIndex",
     methods: {maskCurrency},
     props: ['action', 'products', 'newBtn', 'newRoute'],
-    components: {ProductStatus, EditButton, RemoveButton, IndexCRUD, Dashboard, Link, Paginator, ProducstFilter}
+    components: {
+        FlavorTag,
+        ProductStatus, EditButton, RemoveButton, IndexCRUD, Dashboard, Link, Paginator, ProducstFilter}
 }
 </script>
 
@@ -52,16 +55,7 @@ export default {
 
                                 <Fieldset legend="Aromas">
                                     <template v-for="flavor in product.flavors">
-                                          <span v-if="flavor.tag_color"
-                                                class="inline-block mt-1 border px-2 font-medium mr-1 rounded-lg text-white"
-                                                :style="'background-color:' + flavor.tag_color + ';' + 'color: ' + flavor.text_color + ';'">
-                                              {{ flavor.name }}
-                                          </span>
-                                        <span v-else
-                                              class="inline-block mt-1 border px-2 font-medium mr-1 rounded-lg"
-                                        >
-                                            {{ flavor.name }}
-                                        </span>
+                                        <FlavorTag display_full="true" :flavor="flavor" />
                                     </template>
                                 </Fieldset>
 

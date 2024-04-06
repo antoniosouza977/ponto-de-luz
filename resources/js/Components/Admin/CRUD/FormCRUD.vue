@@ -32,13 +32,13 @@ export default {
 
 <template>
 
-    <div class="p-6 bg-white rounded-lg">
+    <div class="border border-green-200 rounded-lg">
         <div class="flex items-center justify-between bg-title rounded-t-lg p-3">
             <h6 class="m-0 font-bold text-lg">{{ action }}</h6>
             <BackButton/>
         </div>
 
-        <div class="p-3 bg-card">
+        <div class="p-6 bg-card">
             <slot></slot>
         </div>
 

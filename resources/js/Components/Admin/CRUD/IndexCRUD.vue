@@ -11,7 +11,7 @@ export default {
 <template>
 
 
-    <div class="p-6 bg-white rounded-lg min-h-full">
+    <div class="rounded-lg min-h-full border border-green-200">
 
         <div class="bg-card rounded-lg">
             <div class="flex items-center justify-between bg-title rounded-t-lg p-3 m-0">
@@ -23,7 +23,9 @@ export default {
                 </Link>
             </div>
 
-            <slot></slot>
+            <div class="p-6">
+                <slot></slot>
+            </div>
         </div>
 
     </div>

@@ -18,13 +18,6 @@ class Product extends Model
         'category_id'
     ];
 
-    protected function price(): Attribute
-    {
-        return Attribute::make(
-            set: fn($value) => currencyToFloat($value)
-        );
-    }
-
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(ProductCategory::class, 'category_product', 'product_id', 'category_id')

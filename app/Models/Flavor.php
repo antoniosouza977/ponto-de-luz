@@ -9,7 +9,9 @@ class Flavor extends Model
 
     protected $table = 'flavors';
     protected $fillable = [
-        'name'
+        'name',
+        'tag_color',
+        'text_color'
     ];
 
     public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany

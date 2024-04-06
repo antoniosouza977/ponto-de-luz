@@ -10,7 +10,7 @@ export default {
 </script>
 
 <template>
-    <div class="container bg-card min-h-screen min-w-full min-h-full">
+    <div class="container bg-body min-h-screen min-w-full min-h-full">
         <div class="sticky top-0 z-50 px-3">
             <Header></Header>
         </div>

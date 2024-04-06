@@ -20,22 +20,21 @@ export default {
                     items: [
                         {
                             label: 'Produtos',
-                            icon: 'pi pi-shopping-bag',
                             command: () => {
                                 router.get(route('products.index'))
                             }
                         },
                         {
                             label: 'Categorias',
-                            icon: 'pi pi-hashtag',
                             command: () => {
                                 router.get(route('categories.index'))
                             }
                         },
                         {
-                            label: 'UI Kit',
-                            icon: 'pi pi-pencil',
-                            shortcut: '⌘+U'
+                            label: 'Aromas',
+                            command: () => {
+                                router.get(route('flavors.index'))
+                            }
                         },
                         {
                             separator: true
@@ -72,7 +71,7 @@ export default {
 </script>
 
 <template>
-        <Menubar :model="items" class="p-3 rounded-t-none">
+        <Menubar :model="items" class="p-3 rounded-t-none border-green-200">
             <template #start>
             </template>
             <template #item="{ item, props, hasSubmenu, root }">
