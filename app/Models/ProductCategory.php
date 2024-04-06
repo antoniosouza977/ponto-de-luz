@@ -10,6 +10,8 @@ class ProductCategory extends Model
     protected $table = 'product_categories';
     protected $fillable = [
         'name',
+        'tag_color',
+        'text_color',
         'product_type_id'
     ];
 
