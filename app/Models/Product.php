@@ -33,7 +33,9 @@ class Product extends Model
 
     public function flavors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Flavor::class, 'flavor_product', 'product_id', 'flavor_id')->withTimestamps();
+        return $this->belongsToMany(Flavor::class, 'flavor_product', 'product_id', 'flavor_id')
+            ->orderBy('name')
+            ->withTimestamps();
     }
 
     public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
