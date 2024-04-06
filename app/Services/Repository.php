@@ -9,10 +9,13 @@ class Repository
 {
     public function getAllModelsFrom(Model $model, array $columns = null): Collection
     {
+        $query = $model->newQuery();
+
         if ($columns) {
-            return $model->newQuery()->select($columns)->get();
+            $query->select($columns);
         }
-        return $model::all();
+
+        return $query->get();
     }
 
     public function updateOrStoreModel(array $data, Model $model): Model
@@ -26,6 +29,17 @@ class Repository
     public function modelWithRelations(Model $model, array $relations): Model
     {
         return $model->load($relations);
+    }
+
+    public function getModelsWithRelations(Model $model, array $relations): Collection
+    {
+        $query = $model->newQuery();
+
+        if ($relations) {
+            $query->with($relations);
+        }
+
+        return $query->get();
     }
 
     public function destroyModel(Model $model): void
