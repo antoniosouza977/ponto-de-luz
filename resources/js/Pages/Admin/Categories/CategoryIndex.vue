@@ -22,7 +22,7 @@ export default {
 <template>
     <Dashboard>
         <IndexCRUD v-bind="$props">
-            <div class="w-full rounded-lg min-h-full">
+            <div v-if="categories.length" class="w-full rounded-lg min-h-full">
 
                 <div class="p-3 pb-0 rounded-lg bg-white border border-green-200">
                     <div class="flex justify-between align-items-center p-2">
@@ -48,6 +48,9 @@ export default {
                     </div>
                 </div>
 
+            </div>
+            <div v-else>
+                <p>Nenhuma categoria cadastrada ainda.</p>
             </div>
         </IndexCRUD>
     </Dashboard>

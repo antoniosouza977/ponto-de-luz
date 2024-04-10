@@ -1,23 +1,34 @@
 <script>
-import Header from "@/Components/Admin/Dashboard/Header.vue";
+import CustomSidebar from '@/Components/Admin/Dashboard/CustomSidebar.vue'
 
 export default {
-    name: "Dashboard",
-    components: {
-        Header
+    components: { CustomSidebar },
+    data() {
+        return {
+            openSidebar: true,
+            modalSideBar: false,
+        }
     },
+    methods: {
+        toggleSidebar() {
+            if (window.innerWidth < 1000)  return this.modalSideBar = !this.modalSideBar;
+
+            this.openSidebar = !this.openSidebar
+        }
+    }
+
 }
 </script>
 
 <template>
-    <div class="container bg-body min-h-screen min-w-full min-h-full">
-        <div class="sticky top-0 z-50 px-3">
-            <Header></Header>
+    <div class="w-full h-screen flex">
+        <CustomSidebar :dataOpenSideBar="openSidebar" :toggleSidebar="toggleSidebar" :modalSideBar="modalSideBar"/>
+        <div class="w-full h-screen p-3">
+            <Button class="ml-3 my-0 hover:bg-green-400 hover:text-white" icon="pi pi-bars" @click.prevent="toggleSidebar" rounded outlined/>
+            <div class="w-full p-6">
+                <slot></slot>
+            </div>
         </div>
-        <div class="p-3 relative min-h-full">
-            <slot></slot>
-        </div>
-
     </div>
-
 </template>
+

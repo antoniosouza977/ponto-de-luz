@@ -3,11 +3,12 @@ import FormCRUD from "@/Components/Admin/CRUD/FormCRUD.vue";
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
 import {useForm} from "@inertiajs/vue3";
 import InputErrorFeedback from "@/Components/Admin/CRUD/InputErrorFeedback.vue";
+import {Link} from "@inertiajs/vue3";
 
 export default {
     name: "CategoryForm",
     props: ['action', 'formRoute', 'category', 'types'],
-    components: {InputErrorFeedback, FormCRUD, Dashboard},
+    components: {InputErrorFeedback, FormCRUD, Dashboard, Link},
     data() {
         return {
             form: useForm({
@@ -31,14 +32,26 @@ export default {
                 <div class="lg:w-1/3 md:w-1/2 w-full flex flex-col p-3">
                     <label class="font-medium" for="name">Nome da Categoria</label>
                     <InputText id="name" v-model="form.name" class="mt-3" :invalid="Boolean(form.errors.name)"/>
-                    <InputErrorFeedback :error="form.errors.name" />
+                    <InputErrorFeedback :error="form.errors.name"/>
                 </div>
 
-                <div class="lg:w-1/3 md:w-1/2 w-full p-3">
-                    <label class="font-medium" for="product_type_id">Tipo de Produto</label>
-                    <Dropdown inputId="product_type_id" v-model="form.product_type_id" :options="types"
-                              optionLabel="name" optionValue="id" class="w-full my-3" :invalid="Boolean(form.errors.product_type_id)"/>
-                    <InputErrorFeedback :error="form.errors.product_type_id" />
+                <div class="lg:w-1/3 md:w-1/2 w-full p-3 flex items-center">
+                    <div class="w-3/4">
+                        <label class="font-medium" for="product_type_id">Tipo de Produto</label>
+                        <Dropdown
+                            v-model="form.product_type_id"
+                            inputId="product_type_id"
+                            class="w-full my-3"
+                            :options="types"
+                            optionLabel="name"
+                            optionValue="id"
+                            :invalid="Boolean(form.errors.product_type_id)"
+                            :disabled="types.length === 0"/>
+                        <InputErrorFeedback :error="form.errors.product_type_id"/>
+                    </div>
+                    <Link :href="route('product.types.create')">
+                        <Button icon="pi pi-plus" class="ml-3" title="Novo Tipo"/>
+                    </Link>
                 </div>
             </div>
         </FormCRUD>

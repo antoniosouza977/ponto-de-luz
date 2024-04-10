@@ -1,13 +1,22 @@
+import './bootstrap';
+import '../css/app.css';
+import '../css/style.css'
+import '../css/flags.css'
+import "primevue/resources/themes/aura-light-green/theme.css";
+import "primevue/resources/primevue.min.css"; /* Deprecated */
+import "primeicons/primeicons.css";
+import 'sweetalert2/dist/sweetalert2.min.css';
+import "vue-toastification/dist/index.css";
+
+
 import {createApp, h} from 'vue';
 import {createInertiaApp} from '@inertiajs/vue3';
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {ZiggyVue} from '../../vendor/tightenco/ziggy/dist/vue.m';
 import Toast from "vue-toastification";
 import VueSweetalert2 from 'vue-sweetalert2';
-import 'primevue/resources/themes/aura-light-green/theme.css'
-import '/resources/css/app.css'
 
-
+// PrimeVue Components
 import "primeicons/primeicons.css";
 import PrimeVue from "primevue/config";
 import AutoComplete from 'primevue/autocomplete';
@@ -116,11 +125,6 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
-import "vue-toastification/dist/index.css";
-import 'sweetalert2/dist/sweetalert2.min.css';
-import 'primevue/resources/themes/aura-light-green/theme.css'
-
-import helpers from '@/helpers.js'
 
 const Name = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -139,7 +143,12 @@ createInertiaApp({
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {ripple: true})
 
+            .directive('tooltip', Tooltip)
+            .directive('badge', BadgeDirective)
             .directive('ripple', Ripple)
+            .directive('styleclass', StyleClass)
+            .directive('focustrap', FocusTrap)
+            .directive('animateonscroll', AnimateOnScroll)
 
             .component('Accordion', Accordion)
             .component('AccordionTab', AccordionTab)

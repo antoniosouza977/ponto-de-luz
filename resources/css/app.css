@@ -1,8 +1,3 @@
-@import "vue-select/dist/vue-select.css";
-@import "flags.css";
-@import "style.css";
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

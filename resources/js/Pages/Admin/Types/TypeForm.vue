@@ -2,11 +2,12 @@
 import FormCRUD from "@/Components/Admin/CRUD/FormCRUD.vue";
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
 import {useForm} from "@inertiajs/vue3";
+import InputErrorFeedback from "@/Components/Admin/CRUD/InputErrorFeedback.vue";
 
 export default {
     name: "CategoryForm",
     props: ['action', 'formRoute', 'type'],
-    components: {FormCRUD, Dashboard},
+    components: {InputErrorFeedback, FormCRUD, Dashboard},
     data() {
         return {
             form: useForm({
@@ -14,6 +15,16 @@ export default {
                 name: this.type ? this.type.name : null,
                 active: this.type ? this.type.active : 1,
             }),
+            activeOptions: [
+                {
+                    label: 'Ativo',
+                    value: 1
+                },
+                {
+                    label: 'Inativo',
+                    value: 0
+                }
+            ],
             successMessage: 'Tipo de Produto salvo com sucesso!'
         }
     },
@@ -23,25 +34,27 @@ export default {
 <template>
     <Dashboard>
         <FormCRUD v-bind="$props" :form="form" :formRoute="formRoute" :successMessage="successMessage">
-            <div class="d-flex flex-row flex-wrap">
+            <div class="flex flex-wrap border rounded-lg border-green-200 bg-white">
 
-                <div class="col-xl-3 col-12">
-                    <div class="form-group p-3">
-                        <label class="form-label" for="name">Nome</label>
-                        <input class="form-control" type="text" id="name" v-model="form.name">
-                        <div class="my-3 text-danger" v-if="form.errors">{{ form.errors.name }}</div>
-                    </div>
+                <div class="w-full p-3 font-bold">Dados do Tipo de Produto</div>
+
+                <div class="lg:w-1/3 md:w-1/2 w-full flex flex-col p-3">
+                    <label class="font-medium" for="name">Nome do Tipo de Produto</label>
+                    <InputText id="name" v-model="form.name" class="mt-3" :invalid="Boolean(form.errors.name)"/>
+                    <InputErrorFeedback :error="form.errors.name"/>
                 </div>
 
-                <div class="col-xl-3 col-12">
-                    <div class="form-group p-3">
-                        <label class="form-label" for="active">Ativo</label>
-                        <select class="form-select" type="text" id="active" v-model="form.active">
-                            <option value="1">Sim</option>
-                            <option value="0">Não</option>
-                        </select>
-                        <div class="my-3 text-danger" v-if="form.errors">{{ form.errors.active }}</div>
-                    </div>
+                <div class="lg:w-1/3 md:w-1/2 w-full p-3">
+                    <label class="font-medium" for="active">Status</label>
+                    <Dropdown
+                        v-model="form.active"
+                        inputId="active"
+                        class="w-full my-3"
+                        :options="activeOptions"
+                        optionLabel="label"
+                        optionValue="value"
+                        :invalid="Boolean(form.errors.active)"/>
+                    <InputErrorFeedback :error="form.errors.active"/>
                 </div>
             </div>
         </FormCRUD>

@@ -1,27 +1,51 @@
 <script>
 import Dashboard from "@/Pages/Admin/Dashboard.vue";
 import IndexCRUD from "@/Components/Admin/CRUD/IndexCRUD.vue";
-import {Link} from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
 import RemoveButton from "@/Components/Buttons/RemoveButton.vue";
+import EditButton from "@/Components/Buttons/EditButton.vue";
 
 export default {
     name: "TypeIndex",
     props: ['action', 'types', 'newBtn', 'newRoute'],
-    components: {RemoveButton, IndexCRUD, Dashboard, Link}
+    components: {EditButton, RemoveButton, IndexCRUD, Dashboard, Link},
+    methods: {
+        goToProducts(type_id) {
+            router.get(route('products.index', {
+                type_id: type_id,
+            }))
+        }
+    }
 }
 </script>
 
 <template>
     <Dashboard>
         <IndexCRUD v-bind="$props">
-            <div class="w-100">
-                <div class="my-2 shadow-sm w-100 d-flex" v-for="type in types">
-                    <div class="w-75 border-right p-2">{{ type.name }}</div>
-                    <div class="w-25 fs-4 d-flex justify-content-end align-items-center">
-                        <Link :href="route('product.types.edit', type)"><i title="Editar" class="bi bi-pencil-square text-warning mx-3"></i></Link>
-                        <Link><RemoveButton :model="type" :form-route="route('product.types.destroy', type)"></RemoveButton></Link>
+            <div v-if="types.length" class="w-full rounded-lg min-h-full">
+
+                <div class="p-3 pb-0 rounded-lg bg-white border border-green-200">
+                    <div class="flex justify-between align-items-center p-2">
+                        <div class="font-medium">Tipo de Produto</div>
+                        <div class="text-end font-medium"></div>
+                    </div>
+
+                    <div class="flex w-full justify-between py-2 border-t border-green-200" v-for="type in types"
+                         :key="type.id">
+                        <div class="pl-2 flex items-center"><span>{{ type.name }}</span></div>
+                        <div class="flex justify-end">
+                            <Button @click.prevent="goToProducts(type.id)" label="Produtos" severity="info"
+                                    class="mr-3" rounded/>
+                            <EditButton :edit-route="route('product.types.edit', type)"/>
+                            <RemoveButton class="mx-3" :model="type"
+                                          :form-route="route('product.types.destroy', type)"/>
+                        </div>
                     </div>
                 </div>
+
+            </div>
+            <div v-else>
+                <p>Nenhum Tipo de Produto Cadastrado.</p>
             </div>
         </IndexCRUD>
     </Dashboard>

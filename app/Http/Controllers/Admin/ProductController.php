@@ -13,6 +13,7 @@ use App\Services\Eloquent\Builders\ProductQueryBuilder;
 use App\Services\Repository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Response;
 
@@ -109,16 +110,19 @@ class ProductController extends Controller
     public function saveProductImages(Model $product, array $images): void
     {
         foreach ($images as $key => $img) {
-
-            if (isset($img['id'])) {
-                ProductImage::query()->find($img['id'])->update(['view_order' => $key]);
-            } else {
-                $path = Storage::disk('public')->putFile('product_images/product_id_' . $product->id . '/', $img['file']);
-                ProductImage::create([
-                    'path' => $path,
-                    'view_order' => $key,
-                    'product_id' => $product->id
-                ]);
+            try {
+                if (isset($img['id'])) {
+                    ProductImage::query()->find($img['id'])->update(['view_order' => $key]);
+                } else {
+                    $path = Storage::disk('public')->putFile('product_images/product_id_' . $product->id . '/', $img['file']);
+                    ProductImage::create([
+                        'path' => $path,
+                        'view_order' => $key,
+                        'product_id' => $product->id
+                    ]);
+                }
+            } catch (\Throwable $e) {
+                Log::error($e->getMessage());
             }
 
         }

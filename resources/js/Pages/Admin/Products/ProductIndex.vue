@@ -24,14 +24,14 @@ export default {
 <template>
     <Dashboard>
         <IndexCRUD v-bind="$props">
-            <div class="p-3">
+            <div class="p-3" v-if="products.data.length">
                 <div class="flex  items-center w-full justify-between px-3">
                     <span class="ml-3 p-1 font-bold text-gl">Total: {{ products.total }}</span>
                     <ProducstFilter/>
                 </div>
                 <div class="w-full flex flex-wrap">
-                    <div class="xl:w-1/4 lg:w-1/3 w-full p-3" v-for="product in products.data">
-                        <div class="h-100 bg-white border rounded-lg border-green-200 drop-shadow-lg">
+                    <div class="xl:w-1/4 lg:w-1/3 w-full p-3 " v-for="product in products.data">
+                        <div class="h-100 bg-white border rounded-lg border-green-200 drop-shadow-lg min-h-full">
                             <Carousel :value="product.images">
                                 <template #item="image">
                                     <div class="border-1 surface-border border-round">
@@ -83,8 +83,9 @@ export default {
 
                 </div>
             </div>
-
-
+            <div v-else>
+                <p>Nenhum Produto Cadastrado.</p>
+            </div>
             <Paginator v-if="products.per_page < products.total" :links="products.links"/>
 
         </IndexCRUD>

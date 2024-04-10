@@ -13,8 +13,8 @@ export default {
             form: useForm({
                 id: this.flavor ? this.flavor.id : null,
                 name: this.flavor ? this.flavor.name : null,
-                tag_color: this.flavor ? this.flavor.tag_color : null,
-                text_color: this.flavor ? this.flavor.text_color : null,
+                tag_color: this.flavor ? this.flavor.tag_color : '#ffffff',
+                text_color: this.flavor ? this.flavor.text_color : '000000',
             }),
             successMessage: 'Aroma salvo com sucesso!'
         }
@@ -51,7 +51,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="p-3 2xl:w-1/4 lg:w-1/3 md:w-1/2 w-full ">
+                <div v-show="form.name" class="p-3 2xl:w-1/4 lg:w-1/3 md:w-1/2 w-full ">
                     <label class="font-medium">Pré visualização</label>
                     <div class="mt-3 preview-tag">
                         <span class="inline-block border px-2 font-medium mr-1 rounded-lg"

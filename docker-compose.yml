@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    container_name: app
+    container_name: ponto-de-luz
     restart: unless-stopped
     volumes:
       - .:/var/www

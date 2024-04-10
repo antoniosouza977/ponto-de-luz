@@ -14,6 +14,6 @@ export default {
 </script>
 
 <template>
-    <Button @click.prevent="bacK" icon="pi pi-arrow-left" severity="info" rounded/>
+    <Button @click.prevent="bacK" icon="pi pi-arrow-left" severity="success" rounded/>
 </template>
 
