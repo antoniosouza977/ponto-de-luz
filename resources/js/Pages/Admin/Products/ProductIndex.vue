@@ -55,7 +55,7 @@ export default {
 
                                 <Fieldset legend="Aromas">
                                     <template v-for="flavor in product.flavors">
-                                        <FlavorTag display_full="true" :flavor="flavor" />
+                                        <FlavorTag :flavor="flavor" />
                                     </template>
                                 </Fieldset>
 

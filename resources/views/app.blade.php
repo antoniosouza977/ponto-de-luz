@@ -5,7 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ env('APP_NAME') }}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
 
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @vite('resources/css/app.css')
