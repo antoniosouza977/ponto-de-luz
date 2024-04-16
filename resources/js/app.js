@@ -1,8 +1,8 @@
 import './bootstrap';
 import '../css/app.css';
+import "../css/theme.css";
 import '../css/style.css'
 import '../css/flags.css'
-import "primevue/resources/themes/aura-light-green/theme.css";
 import "primevue/resources/primevue.min.css"; /* Deprecated */
 import "primeicons/primeicons.css";
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -43,14 +43,14 @@ import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';
 import ConfirmDialog from 'primevue/confirmdialog';
 import ConfirmPopup from 'primevue/confirmpopup';
-import ConfirmationService from 'primevue/confirmationservice';
+// import ConfirmationService from 'primevue/confirmationservice';
 import ContextMenu from 'primevue/contextmenu';
 import DataTable from 'primevue/datatable';
 import DataView from 'primevue/dataview';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions';
 import DeferredContent from 'primevue/deferredcontent';
 import Dialog from 'primevue/dialog';
-import DialogService from 'primevue/dialogservice'
+// import DialogService from 'primevue/dialogservice'
 import Divider from 'primevue/divider';
 import Dock from 'primevue/dock';
 import Dropdown from 'primevue/dropdown';
@@ -111,7 +111,7 @@ import StyleClass from 'primevue/styleclass';
 import TabMenu from 'primevue/tabmenu';
 import TieredMenu from 'primevue/tieredmenu';
 import Textarea from 'primevue/textarea';
-import ToastService from 'primevue/toastservice';
+// import ToastService from 'primevue/toastservice';
 import Toolbar from 'primevue/toolbar';
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
@@ -129,7 +129,7 @@ import VirtualScroller from 'primevue/virtualscroller';
 const Name = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
-    title: (title) => `${Name}`,
+    title: () => `${Name}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({el, App, props, plugin}) {
         return createApp({render: () => h(App, props)})

@@ -8,8 +8,9 @@ export default {
     theme: {
         extend: {
             backgroundColor: {
-                'body' : '#ffffff',
-                'title' : '#d1f8d1',
+                'rosa1' : '#F6B8AD',
+                'rosa2' : '#FADCC4',
+                'rosa2hv' : '#ffe7d3',
                 'card' : '#f4fffa',
             }
         },

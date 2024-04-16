@@ -10,4 +10,9 @@ class ProductType extends Model
         'name',
         'active'
     ];
+
+    public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ProductCategory::class, 'product_type_id', 'id');
+    }
 }

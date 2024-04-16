@@ -6,11 +6,10 @@ use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Shop\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return inertia()->render('Home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

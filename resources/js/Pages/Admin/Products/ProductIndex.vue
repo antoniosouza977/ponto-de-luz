@@ -17,7 +17,8 @@ export default {
     props: ['action', 'products', 'newBtn', 'newRoute'],
     components: {
         FlavorTag,
-        ProductStatus, EditButton, RemoveButton, IndexCRUD, Dashboard, Link, Paginator, ProducstFilter}
+        ProductStatus, EditButton, RemoveButton, IndexCRUD, Dashboard, Link, Paginator, ProducstFilter
+    }
 }
 </script>
 
@@ -34,13 +35,9 @@ export default {
                         <div class="h-100 bg-white border rounded-lg border-green-200 drop-shadow-lg min-h-full">
                             <Carousel :value="product.images">
                                 <template #item="image">
-                                    <div class="border-1 surface-border border-round">
-                                        <div class="my-3 pt-3">
-                                            <div class="relative mx-auto">
-                                                <img :src="'/storage/'+image.data.path" class="w-full rounded-lg"/>
-                                            </div>
+                                        <div class="pt-3">
+                                            <img :src="'/storage/'+image.data.path" class="w-full rounded" alt=""/>
                                         </div>
-                                    </div>
                                 </template>
                             </Carousel>
                             <div class="p-3 border-t">
@@ -55,7 +52,7 @@ export default {
 
                                 <Fieldset legend="Aromas">
                                     <template v-for="flavor in product.flavors">
-                                        <FlavorTag :flavor="flavor" />
+                                        <FlavorTag :flavor="flavor"/>
                                     </template>
                                 </Fieldset>
 

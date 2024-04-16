@@ -1,38 +1,60 @@
 <script>
-import {Link, router} from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
 import LogoutButton from "@/Components/Auth/LogoutButton.vue";
 
 export default {
     name: "Header",
     components: {LogoutButton, Link},
+    props: ['product_types'],
     data() {
         return {
-            items: [
+            items: this.getCategoriesForMenu()
+        }
+    },
+    methods: {
+        getCategoriesForMenu() {
+            const items_menu_list = [];
+            const items_df = [
                 {
-                    label: 'Loja',
-                    icon: 'pi pi-home',
-                    command: () => {
-                        router.get('/')
-                    }
+                    label: 'Sobre nós'
+                },
+                {
+                    label: 'Contatos'
                 }
-            ],
+            ]
+
+            this.product_types.forEach(type => {
+                let menu_item = {}
+                menu_item.label = type.name;
+                menu_item.items = []
+
+                type.categories.forEach(category => {
+                    menu_item.items.push({
+                        label: category.name,
+                    })
+                })
+
+                items_menu_list.push(menu_item)
+            })
+
+            items_menu_list.push(...items_df)
+
+            return items_menu_list
         }
     }
 }
 </script>
 
 <template>
-    <Menubar :model="items">
+    <Menubar class="h-20 border-none rounded-none w-full sticky top-0 z-50" :model="items">
         <template #start>
-            <svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg"
-                 class="h-2rem">
-                <path d="..." fill="var(--primary-color)"/>
-                <path d="..." fill="var(--text-color)"/>
-            </svg>
+            <div class="flex items-center justify-center mx-6">
+                <p class="text-lg font-medium">Ponto de Luz</p>
+            </div>
         </template>
         <template #item="{ item, props, hasSubmenu, root }">
-            <a v-ripple class="flex align-items-center" v-bind="props.action">
-                <span :class="item.icon"/>
+            <a v-ripple class="flex align-items-center font-medium" v-bind="props.action">
+                <!--                <span :class="item.icon"/>-->
                 <span class="ml-2">{{ item.label }}</span>
                 <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge"/>
                 <span v-if="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{
@@ -54,4 +76,7 @@ export default {
         </template>
     </Menubar>
 </template>
+
+<style scoped>
+</style>
 

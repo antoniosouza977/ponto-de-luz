@@ -1,9 +1,18 @@
+:root {
+    --my-font-family: "Poppins", sans-serif;
+    --rosa1: #F6B8AD;
+    --rosa2: #FADCC4;
+    --azul1: #ACC4CA;
+    --azul2: #DDE4DC;
+    --verde: #C3D495
+}
+
 html {
-    font-size: 15px;
+    font-size: 1rem;
 }
 
 body {
-    font-family: var(--font-family);
+    font-family: var(--my-font-family);
     font-weight: normal;
     background: var(--surface-ground);
     color: var(--text-color);
